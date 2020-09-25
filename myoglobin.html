@@ -16,40 +16,121 @@
 
 
 
-    <!-- NON TEMPLATE CONTENT -->
+    <!-- NON TEMPLATE CONTENT : START -->
 
 
 <script src="javascript/popup.js"></script>
     <h2> Myoglobinets struktur </h2>
     <p>
-    Vi ska börja med myoglobin, ett syretransporterande protein som finns i muskelvävnad. Först ska vi undersöka tertiärstrukturen, d.v.s. vilka sekundärstruktur elementen är och hur de är ordnade i förhållande till varandra
+    Vi ska börja med myoglobin, ett syretransporterande protein som finns i muskelvävnad.
+    Först ska vi undersöka tertiärstrukturen, d.v.s.
+    vilka sekundärstruktur elementen är och hur de är ordnade i förhållande till varandra
     </p>
     <p>
-    Börja med att läsa in filen myo_oxy.pdb. Denna fil innehåller resultatet av en röntgenkristallografisk undersökning av oxymyoglobin. Var och en av de röda punkterna motsvarar syreatomen i en vattenmolekyl. En kristall av ett vattenlösligt protein innehåller 30-40% vatten. Dessutom finns en sulfatgrupp som härstammar från kristallisationsprocessen.
+    Börja med att öppna strukturen för myoglobin i länken nedan.
+    Detta fönster innehåller resultatet av en röntgenkristallografisk
+    undersökning av oxymyoglobin. Var och en av de röda punkterna motsvarar
+    syreatomen i en vattenmolekyl. En kristall av ett vattenlösligt protein innehåller 30-40% vatten.
+    Dessutom finns en sulfatgrupp som härstammar från kristallisationsprocessen.
     </p>
 
     <p>
-    <a id="popup" href="myo_jmol_window.html" target="popup" onclick="call()"> Klicka här för att </a> öppna strukturen för myoglobin
+    <a id="popup" href="myoglobin_popup.html" target="popup" onclick="call()"> Klicka här för att </a> öppna strukturen för myoglobin
     </p> 
 
     <p>
     Längst ner i fönstret som öppnades finns olika alternativ för hur proteinet
     presenteras:
     <ul>
-        <li>"ball and stick" Visar proteinet med samtliga atomer (förutom vatten)</li>
+        <li>"Ball and stick" Visar proteinet med samtliga atomer (förutom vatten)</li>
+        <li>"Spacefill" är en utfyllnadsvy, i övrigt identiskt med "ball and stick" </li>
         <li>"Heme & His-focused" Visar sekundarstrukturer för myoglobinet, men 
             låter Heme och His-grupper belysas genom att vara i ball-and-stick form</li>
         <li>"Surface - hydrophobicity" Visar proteinets ytstruktur och belyser polariteten
             vid olika områden på proteinet</li>
     </ul>
     </p>
+    <p>
+    Det finns också flera andra alternativ för att undersöka proteinet närmare.
+    Genom att högerklicka någonstans i fönstret där proteinet visas får du fram en
+    meny. Testa att högerklicka på proteinet, gå ner en bit och klicka sedan på
+    "Rotera" och sedan "på". Proteinet ska nu rotera. För att stoppa rotationen
+    går du till "rotera" och "av".
+    </p>
+
+    <p>
+    Du kan själv snurra på proteinet genom att vänsterklicka på proteinet och dra
+    fram och tillbaka med musen. Om du vill snurra proteinet runt sin egen axel i z-led
+    håller du inne shift samtidigt som du drar musen horisontellt - drar du den upp
+    eller ner när shift är nedtryckt zoomar du istället in och ut. För att flytta
+    runt proteinet innuti fönstret håller du nere control och använder vänster musknapp.
+    <p>
+
+    Undersök strukturen och svara på frågorna nedan.
+    </p>
+
     <br>
-    <h3>Frågor</h3>
+    <h3>Uppgift 1</h3>
+    <h4>1.1</h4>
+    <p> Vilken typ av sekundärstruktur ser du och hur många? </p>
+
+    <!-- ans: α-helix, 8 st syns i programmet -->
+    <h4>1.2</h4>
+    <p> Vilken typ av aminosyror (hydrofoba (blå) / hydrofila (röd)) finns företrädelsevis:
+    <ul>
+        <li> På proteinets utsida, dvs exponerade för den omgivande H2O lösningen? </li>
+        <!-- -Hydrofila    (röda) -->
+        <li> I proteinets insida? </li>
+        <!-- -Hydrofoba    (blåa) -->
+    </ul>
+    </p>
+
+    <h4>1.3</h4>
+    <p>
+    Titta närmare på miljön (hydrofob/hydrofil) i den ficka i proteinet som inrymmer porfyrinringen.
+    Har fickan runt hem-gruppen hydrofob eller hydrofil karaktär?
+    </p>
+    <!-- Hydrofob (blå) -->
+
+    <h4>1.4</h4>
+    <p> 
+    Du ska nu undersöka bindningsvinkeln mellan järnet i hem-gruppen och det transporterade 
+    syret. Hem-gruppen syns bäst om du sätter status "Heme & His-focused". Järn-atomen
+    är i mitten av hem-gruppen (rosa). Du kan verifiera att det är järn genom att låta
+    muspekaren vila över atomen, du ska då se en annotering som säger "[HEM] 546.FE #1568", där
+    'FE' indikerar att det rör sig om en järnatom.
+    </p>
+
+    <p>
+    Syreatomerna sticker upp från järnet som två röda bollar. Du mäter vinkeln de binder i genom
+    att dubbelklicka på järnatomen, klicka sedan på den närmaste syreatomen, och dubbelklicka
+    slutligen på den andra syreatomen.
+    </p>
+    <p> Om du skulle behöva göra om mätningen högerklickar du på fönstret och går sedan till "Mätningar" ->
+    "Radera mätningar".
+    <p>
+    
+    <p>
+    Hur stor är bindningsvinkeln Fe-O-O?
+    </p>
+    
+    <h3>Diskussionsfråga Myoglobin</h3>
+    <p>
+    Försök förklara varför syremolekylen har just den bindningsvinkel ni ser i föregående fråga.
+    </p>
+
+    <p>
+    Den mest gynsamma bindningsvinkeln för kolmonoxid bunden till hemgruppens järnatom är 180 grader.
+    Skulle i så fall kolmonoxidmolekylen få plats med en sådan bindningsvinkel? (Syremolekylen och kolmonoxidmolekylen är ungefär lika stora.) 
+    </p>
 
 
 
-    <!-- END OF NON TEMPLATE CONTENT -->
 
+
+
+
+    <!-- NON TEMPLATE CONTENT : END -->
 
 
 

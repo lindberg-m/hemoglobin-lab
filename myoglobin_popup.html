@@ -15,15 +15,17 @@
         $(document).ready(
             function(){
                 // Ändra kommandot nedan för att ladda andra grejer
-                Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB; delete water; delete [SO4]545")
+                Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB; delete [SO4]545")
 
                 var r1 = [
-                    ["isosurface off; select amino; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "Kul- och pinnmodell", true],
-                    ["isosurface off; select amino; spacefill only; color cpk", "Kalottmodell"]
-                ]
+                    ["delete water; isosurface off; select amino; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "Ball and stick"],
+                    ["delete water;isosurface off; select amino; spacefill only; color cpk", "Spacefill"],
+            ["delete water;isosurface off; restrict his64,his93,hem546; wireframe 0.2; spacefill 0.4; select protein; color purple; select amino and not (his64 or his93); cartoon on; color gray; color TRANSLUCENT", "Heme & His-focused"],
 
+                    ["delete water;isosurface off; wireframe only; wireframe 0.2; spacefill 0.4; isosurface models/myo_oxy_hydrophobic_surface.jvxl","Surface - hydrophobicity"]
+                ]
                 $("#aminobtns").html(Jmol.jmolRadioGroup(jmolApplet0, r1, "<br>", "Protein"))
-        })
+            })
     </script>
 
     </head>
