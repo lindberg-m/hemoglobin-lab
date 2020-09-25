@@ -1,0 +1,34 @@
+<script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
+<script type="text/javascript"> 
+
+    // supersimple2.htm - illustrating the use of jQuery(document).ready to 
+    // populate all spans and divs AFTER the page is loaded.
+    // This is good programming practice.
+
+    $(document).ready(
+        function() {
+            Info = {
+                width: '100%',
+                height: '100%',
+                debug: false,
+                j2sPath: "jsmol/jsmol/j2s",
+                color: "#101010",
+                disableJ2SLoadMonitor: true,
+                disableInitialConsole: true,
+                addSelectionOptions: false,
+                serverURL: "jsmol/jsmol/php/jsmol.php",
+                use: "HTML5",
+                readyFunction: null,
+                script: "load models/MYO_OXY.PDB; delete water; delete [SO4]545; set zoomLarge true; spin on;"
+            }
+
+            $("#JmolWindow").html(Jmol.getAppletHtml("jmolApplet0",Info))
+        }
+    );
+</script>
+
+<div class="column">
+    <div id=JmolWindow class=JmolPanels></div>
+    <div id=btns></div>
+</div>
+

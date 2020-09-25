@@ -1,57 +1,30 @@
-
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Task 1</title>
+        <title>TITEL HÄR</title>
         <meta charset="utf-8">
-
-        <!-- -->
-    
-        <h1 style="color:#ef6c64">
-            Hemoglobin Lab
-        </h1>
-
-        <h2 style="color:#f99d82">
-            Dis is da firsht taschk
-        </h2>
-
-        <script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
-        <script type="text/javascript"> 
-
-            $(document).ready(
-                function() {
-                    Info = {
-
-                        width: 1000,
-                        height: 700,
-                        debug: false,
-                        j2sPath: "jsmol/jsmol/j2s",
-                        color: "#f0f0f0",
-                        disableJ2SLoadMonitor: true,
-                        disableInitialConsole: true,
-                        addSelectionOptions: false,
-                        serverURL: "jsmol/jsmol/php/jsmol.php",
-                        use: "HTML5",
-                        readyFunction: null,
-                        script: "load models/MYO_OXY.PDB; delete water; delete [SO4]545"
-                    }
-
-                    $("#mydiv").html(Jmol.getAppletHtml("jmolApplet0",Info))
-
-
-                    var r = [
-                        ["isosurface off; select all; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "ball and stick", true],
-                        ["isosurface off; restrict his64,his93,hem546; wireframe 0.2; spacefill 0.4; select protein; color purple; select amino and not (his64 or his93); cartoon on; color gray; color TRANSLUCENT", "Heme & His-focused"],
-                        ["isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl","Surface - hydrophobicity"]
-
-                    ]
-                    $("#btns").html(Jmol.jmolRadioGroup(jmolApplet0, r, "<br>", "Viewing options"))
-                }
-            );
-        </script>
+        <link rel="stylesheet" href="style.css">
+        <!-- Importera filer för:
+            - javascript för popup
+            - header och navbar
+        -->
+        <script src="popup.js"></script>
+        <h1> Myoglobin </h1>
     </head>
     <body>
-        <span id=mydiv></span>
-        <span id=btns></span>
+        <div id="content">
+            <h2> Myoglobinets struktur </h2>
+            <p>
+            Vi ska börja med myoglobin, ett syretransporterande protein som finns i muskelvävnad. Först ska vi undersöka tertiärstrukturen, d.v.s. vilka sekundärstruktur elementen är och hur de är ordnade i förhållande till varandra
+            </p>
+            <p>
+            Börja med att läsa in filen myo_oxy.pdb. Denna fil innehåller resultatet av en röntgenkristallografisk undersökning av oxymyoglobin. Var och en av de röda punkterna motsvarar syreatomen i en vattenmolekyl. En kristall av ett vattenlösligt protein innehåller 30-40% vatten. Dessutom finns en sulfatgrupp som härstammar från kristallisationsprocessen.
+            </p>
+
+            <p>
+            Öppna strukturen för <a id="popup" href="jmol_window.html" target="popup" onclick="call()"> myoglobin </a>
+            </p>
+
+        </div>
     </body>
 </html>
