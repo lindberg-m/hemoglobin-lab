@@ -1,0 +1,26 @@
+
+html,
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+
+/* Jmol till vänster, kontroller till höger. Jmol anpassar storlek efter avd som finns över efter kontrollerna */
+.box {
+	height:100%;
+	overflow: hidden; /*overflow hidden behövs för att height: 100% ska fungera i Firefox av någon anledning*/
+	display: flex;
+	flex-flow: row;
+}
+
+.box .jmolpane{
+	flex: 1 1 auto;
+
+}
+
+.box .controls {
+	flex: 0 0 300px;
+}
+

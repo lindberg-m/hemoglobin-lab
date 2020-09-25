@@ -6,7 +6,7 @@ $(document).ready(
             height: "100%",
             debug: false,
             j2sPath: "jsmol/jsmol/j2s",
-            color: "#ffffff",
+            color: "#000000",
             disableJ2SLoadMonitor: true,
             disableInitialConsole: true,
             addSelectionOptions: false,
