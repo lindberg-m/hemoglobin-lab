@@ -3,27 +3,57 @@
     <head>
         <title>TITEL HÄR</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
         <!-- Importera filer för:
             - javascript för popup
             - header och navbar
         -->
-        <script src="popup.js"></script>
+        <script src="javascript/popup.js"></script>
         <h1> Myoglobin </h1>
     </head>
     <body>
         <div id="content">
-            <h2> Myoglobinets struktur </h2>
-            <p>
-            Vi ska börja med myoglobin, ett syretransporterande protein som finns i muskelvävnad. Först ska vi undersöka tertiärstrukturen, d.v.s. vilka sekundärstruktur elementen är och hur de är ordnade i förhållande till varandra
-            </p>
-            <p>
-            Börja med att läsa in filen myo_oxy.pdb. Denna fil innehåller resultatet av en röntgenkristallografisk undersökning av oxymyoglobin. Var och en av de röda punkterna motsvarar syreatomen i en vattenmolekyl. En kristall av ett vattenlösligt protein innehåller 30-40% vatten. Dessutom finns en sulfatgrupp som härstammar från kristallisationsprocessen.
-            </p>
 
-            <p>
-            Öppna strukturen för <a id="popup" href="jmol_window.html" target="popup" onclick="call()"> myoglobin </a>
-            </p>
+
+
+    <!-- NON TEMPLATE CONTENT -->
+
+
+<script src="javascript/popup.js"></script>
+    <h2> Myoglobinets struktur </h2>
+    <p>
+    Vi ska börja med myoglobin, ett syretransporterande protein som finns i muskelvävnad. Först ska vi undersöka tertiärstrukturen, d.v.s. vilka sekundärstruktur elementen är och hur de är ordnade i förhållande till varandra
+    </p>
+    <p>
+    Börja med att läsa in filen myo_oxy.pdb. Denna fil innehåller resultatet av en röntgenkristallografisk undersökning av oxymyoglobin. Var och en av de röda punkterna motsvarar syreatomen i en vattenmolekyl. En kristall av ett vattenlösligt protein innehåller 30-40% vatten. Dessutom finns en sulfatgrupp som härstammar från kristallisationsprocessen.
+    </p>
+
+    <p>
+    <a id="popup" href="myo_jmol_window.html" target="popup" onclick="call()"> Klicka här för att </a> öppna strukturen för myoglobin
+    </p> 
+
+    <p>
+    Längst ner i fönstret som öppnades finns olika alternativ för hur proteinet
+    presenteras:
+    <ul>
+        <li>"ball and stick" Visar proteinet med samtliga atomer (förutom vatten)</li>
+        <li>"Heme & His-focused" Visar sekundarstrukturer för myoglobinet, men 
+            låter Heme och His-grupper belysas genom att vara i ball-and-stick form</li>
+        <li>"Surface - hydrophobicity" Visar proteinets ytstruktur och belyser polariteten
+            vid olika områden på proteinet</li>
+    </ul>
+    </p>
+    <br>
+    <h3>Frågor</h3>
+
+
+
+    <!-- END OF NON TEMPLATE CONTENT -->
+
+
+
+
+
 
         </div>
     </body>
