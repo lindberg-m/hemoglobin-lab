@@ -35,15 +35,23 @@ body {
 
 
 .control_group {
-	padding-left: 20px
+	padding-left: 20px;
+	padding-bottom: 20px;
 }
 
 h2 {
-	margin-top: 15px;
+	margin-top: 0px;
 	margin-bottom: 5px;
 }
 
 h3 {
-	margin-top: 15px;
+	margin-top: 10px;
 	margin-bottom: 5px;
 }
+
+/* knappen fick konstig font size i firefox, så tänkte ändra här, men för mycket pill.
+.button input {
+	font-family: times;
+	font-size: 16px;
+}
+*/

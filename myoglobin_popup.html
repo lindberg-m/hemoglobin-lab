@@ -21,14 +21,18 @@
                     ["display add amino; select amino; wireframe only; wireframe 0.2; spacefill 0.4;", "Kul- och pinnmodell", true],
                     ["display add amino; select amino; spacefill only;", "Kalottmodell"],
                     ["display add amino; select amino; cartoon only;", "Cartoon"],
-                    ["hide amino;", "Göm"]
+                    ["hide add amino;", "Göm"]
                 ]
                 $("#amino_model_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_model, "<br>", "amino_model"))
+
+                $("#his_button").html(Jmol.jmolButton(jmolApplet0, "select his64,his93; wireframe only; wireframe 0.2; spacefill 0.4; color cyan;", "Hightlight His64 & His93"))
+
 
                 var r_amino_color = [
                     ["select amino; color cpk", "CPK", true],
                     ["select (amino and polar); color red; select (amino and hydrophobic); color blue;", "Hydrofobicitet"],
-                    ["select amino; color red", "Röd"]
+                    ["select amino; color red", "Röd"],
+                    ["select amino; color TRANSLUCENT", "Genomskinlig"]
                 ]
                 $("#amino_color_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_color, "<br>", "amino_color"))
 
@@ -37,13 +41,20 @@
                     jmolApplet0,"isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl","isosurface off","Hydrofob yta"))
 
                 $("#water_molecules").html(Jmol.jmolCheckbox(
-                    jmolApplet0, "display add water","hide water", "Water molecules", true))
+                    jmolApplet0, "display add water","hide add water", "Water molecules", true))
 
-                var r2 = [
-                    ["select hem546; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "Kul- och pinnmodell", true],
-                    ["select hem546; spacefill only; color cpk", "Kalottmodell"]
+                var r_heme_model = [
+                    ["display add hem546; select hem546; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "Kul- och pinnmodell", true],
+                    ["display add hem546; select hem546; spacefill only; color cpk", "Kalottmodell"],
+                    ["hide add hem546;", "Göm"]
                 ]
-                $("#hemebtns").html(Jmol.jmolRadioGroup(jmolApplet0, r2, "<br>", "Heme"))
+                $("#heme_model_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_heme_model, "<br>", "Heme_model"))
+
+                var r_heme_color = [
+                    ["select hem546; color cpk", "CPK", true],
+                    ["select hem546; color purple", "Lila"]
+                ]
+                $("#heme_color_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_heme_color, "<br>", "Heme_color"))
         })
 
     </script>
@@ -63,15 +74,26 @@
                     <br>
                     <div id=amino_surface_checkbox></div>
                     <div id=water_molecules></div>
+                    <br>
+                    <div id=his_button class=button></div>
                     
-
+                    <br>
                     <h3>Färg</h3>
                     <div id=amino_color_btns class=jmol_radio_group></div>
                 </div>
                 <h2>Heme</h2>
                 <div class=control_group>
-                    <div id=hemebtns class=jmol_radio_group></div>
+                    <h3>Modell</h3>
+                    <div id=heme_model_btns class=jmol_radio_group></div>
+                    <br>
+                    <h3>Färg</h3>
+                    <div id=heme_color_btns class=jmol_radio_group></div>
                 </div>
+<!-- 
+                <h2>His 64,93</h2>
+                <div class=control_group>
+
+                </div> -->
             </div>
         </div>
     </body>
