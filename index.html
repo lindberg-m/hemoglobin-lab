@@ -1,82 +1,23 @@
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Super-Simple JSmol Local</title>
-        <meta charset="utf-8">
-        <style>
-        .column {
-            float: left;
-            width: 50%;
-            padding: 5px;
-        }
-        </style>
-
-
+  <head>
+    <title>HEMOGLOBIN-LAB PROTOTYP</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div id="content">
         <h1 style="color:#ef6c64">
             Hemoglobin Lab
         </h1>
-
-        <h2 style="color:#f99d82">
-            Interface Instructions
-        </h2>
-
-
-        <script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
-        <script type="text/javascript"> 
-
-            // supersimple2.htm - illustrating the use of jQuery(document).ready to 
-            // populate all spans and divs AFTER the page is loaded.
-            // This is good programming practice.
-
-            $(document).ready(
-                function() {
-                    Info = {
-
-                        width: 1000,
-                        height: 700,
-                        debug: false,
-                        j2sPath: "jsmol/jsmol/j2s",
-                        color: "#101010",
-                        disableJ2SLoadMonitor: true,
-                        disableInitialConsole: true,
-                        addSelectionOptions: false,
-                        serverURL: "jsmol/jsmol/php/jsmol.php",
-                        use: "HTML5",
-                        readyFunction: null,
-                        script: "load models/MYO_OXY.PDB; delete water; delete [SO4]545"
-                    }
-
-                    $("#mydiv").html(Jmol.getAppletHtml("jmolApplet0",Info))
-
-                    // $("#btns").html(
-                    //   Jmol.jmolButton(jmolApplet0, "isosurface myo ignore(hetero) saSurface 0.05 colorscheme rwb property hydrophobicity","Surface - hydrophobicity")
-                    //  +Jmol.jmolButton(jmolApplet0, "spin off","spin OFF")
-                    //  )  
-
-                    var r = [
-                        ["isosurface off; select all; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "ball and stick", true],
-                        ["isosurface off; restrict his64,his93,hem546; wireframe 0.2; spacefill 0.4; select protein; color purple; select amino and not (his64 or his93); cartoon on; color gray; color TRANSLUCENT", "Heme & His-focused"],
-                        ["isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl","Surface - hydrophobicity"]
-
-                    ]
-                    $("#btns").html(Jmol.jmolRadioGroup(jmolApplet0, r, "<br>", "Viewing options"))
-                }
-            );
-
-
-        </script>
-    </head>
-    <body>
-        <div class='row'>
-            <embed type="text/html" src="instructions/intro.html" width="900" height="200"> 
-                <div class='column' style="width:100%" id=mydiv> </div>
-                    <!-- <span id=mydiv></span> -->
-                <div>
-                    <div id=btns style="width:100%" class='column'></span> </div>
-                    <!-- <span id=btns class='column'></span> -->
-                </div>
-        <br>
-        <br>
-        <h3 style="color: #f48573"> Now go to next <a href=myoglobin.html> task! </a> </h3>
-    </body>
+        <p>
+        Välkommen till Hemoglobinlabben. I denna datorbaserade laboration 
+        kommer vi titta närmare på proteinstrukturen av flera olika protein,
+        däribland de syretransporterande proteinen myoglobin och hemoglobin.
+        </p>
+        <p>
+        <h3> Gå till första <a href=myoglobin.html> uppgiften</a> </h3>
+    </div>
+  </body>
 </html>
