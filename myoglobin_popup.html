@@ -1,67 +1,137 @@
-
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Myoglobin</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style_jmol.css">
+        <title>Myoglobin</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style_jmol.css">
 
 
-    <script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
-    <script type="text/javascript" src="javascript/jmolsetup.js"></script>
-
-    <!-- Initial jmol script to run (already initiated) -->
-    <script type="text/javascript">
-        $(document).ready(
-            function(){
-                // Ändra kommandot nedan för att ladda andra grejer
-                Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB; delete [SO4]545")
-
-                var r_amino_model = [
-                    ["display add amino; select amino; wireframe only; wireframe 0.2; spacefill 0.4;", "Kul- och pinnmodell", true],
-                    ["display add amino; select amino; spacefill only;", "Kalottmodell"],
-                    ["display add amino; select amino; cartoon only;", "Cartoon"],
-                    ["hide add amino;", "Göm"]
-                ]
-                $("#amino_model_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_model, "<br>", "amino_model"))
-
-                $("#his_button_1").html(Jmol.jmolButton(jmolApplet0, "display add his64,his93; select his64,his93; wireframe only; wireframe 0.2; spacefill 0.4; color cyan;", "Visa kul- och pinnmodell"))
-                
-                $("#his_button_2").html(Jmol.jmolButton(jmolApplet0, "display add his64,his93; select his64,his93; spacefill; color cyan;", "Visa kalottmodell"))
+        <script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
+        <script type="text/javascript" src="javascript/jmolsetup.js"></script>
 
 
-                var r_amino_color = [
-                    ["select amino; color cpk", "CPK", true],
-                    ["select (amino and polar); color red; select (amino and hydrophobic); color blue;", "Hydrofobicitet"],
-                    ["select amino; color structure", "Sekundärstruktur"],
-                    ["select amino; color TRANSLUCENT", "Genomskinlig"],
-                    ["select amino; color green", "Grön"]
-                ]
-                $("#amino_color_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_color, "<br>", "amino_color"))
+
+        <script type="text/javascript">
+            let global_state = new Map([
+                        ["amino_model", "ball_and_stick"],
+                        ["amino_color", "CPK"],
+                        ["his_model", "same_as_protein"],
+                        ["heme_model", "ball_and_stick"],
+                        ["heme_color", "CPK"],
+                        ["hydrophobic_surface", "false"],
+                        ["show_water", "true"]
+                        ]);
+
+            function refreshJMol(state) {
+
+                let s = ""; 
+                switch( state.get("amino_model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add amino; select amino; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    break;
+                    case "spacefill":
+                    s = s + "display add amino; select amino; spacefill only;";
+                    break;
+                    case "cartoon":
+                    s = s + "display add amino; select amino; cartoon only;";
+                    break;
+                    case "hide":
+                    s = s + "hide add amino;";
+                    break;
+                }
+                switch( state.get("amino_color") ){
+                    case "CPK":
+                    s = s + "select amino; color cpk;";
+                    break;
+                    case "hydrophobicity":
+                    s = s + "select (amino and polar); color red; select (amino and hydrophobic); color blue;";
+                    break;
+                    case "sec_structure":
+                    s = s + "select amino; color structure;";
+                    break;
+                    case "translucent":
+                    s = s + "select amino; color cpk; color TRANSLUCENT;";
+                    break;
+                    case "green":
+                    s = s + "select amino; color green;";
+                    break;
+                }
+                switch( state.get("his_model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add his64,his93; select his64,his93; wireframe only; wireframe 0.2; spacefill 0.4; color cyan;";
+                    break;
+                    case "spacefill":
+                    s = s + "display add his64,his93; select his64,his93; spacefill; color cyan;";
+                    break;
+                }
+                switch( state.get("heme_model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add hem546; select hem546; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    break;
+                    case "spacefill":
+                    s = s + "display add hem546; select hem546; spacefill only;";
+                    break;
+                    case "cartoon":
+                    s = s + "display add hem546; select hem546; cartoon only;";
+                    break;
+                    case "hide":
+                    s = s + "hide add hem546;";
+                    break;
+                }
+                switch( state.get("heme_color") ){
+                    case "CPK":
+                    s = s + "select hem546; color cpk;";
+                    break;
+                    case "purple":
+                    s = s + "select hem546; color purple;";
+                    break;
+                }
+                switch( state.get("show_water") ) {
+                    case true:
+                    s = s + "display add water;";
+                    break;
+                    case false:
+                    s = s + "hide add water;";
+                    break;
+                }
+                switch( state.get("hydrophobic_surface") ) {
+                    case true:
+                    s = s + "isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl";
+                    break;
+                    case false:
+                    s = s + "isosurface off;";
+                    break;
+                }
 
 
-                $("#amino_surface_checkbox").html(Jmol.jmolCheckbox(
-                    jmolApplet0,"isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl","isosurface off","Hydrofob yta"))
+                Jmol.script(jmolApplet0, s);
+            }
 
-                $("#water_molecules").html(Jmol.jmolCheckbox(
-                    jmolApplet0, "display add water","hide add water", "Visa vattenmolekyler", true))
+            function setStateRadio(radio) {
+                global_state.set(radio.name, radio.value);
+                refreshJMol(global_state);
+            }
 
-                var r_heme_model = [
-                    ["display add hem546; select hem546; wireframe only; wireframe 0.2; spacefill 0.4", "Kul- och pinnmodell", true],
-                    ["display add hem546; select hem546; spacefill only", "Kalottmodell"],
-                    ["hide add hem546;", "Göm"]
-                ]
-                $("#heme_model_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_heme_model, "<br>", "Heme_model"))
+            function setStateCheck(checkbox) {
+                global_state.set(checkbox.name, checkbox.checked);
+                refreshJMol(global_state);
+            }
+        </script>
 
-                var r_heme_color = [
-                    ["select hem546; color cpk", "CPK", true],
-                    ["select hem546; color purple", "Lila"]
-                ]
-                $("#heme_color_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_heme_color, "<br>", "Heme_color"))
-        })
 
-    </script>
+
+        <!-- Initial jmol script to run (already initiated) -->
+        <script type="text/javascript">
+            $(document).ready(
+                function(){
+                    // Ändra kommandot nedan för att ladda andra grejer
+                    Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB; delete [SO4]545;")
+                    refreshJMol(global_state);
+            })
+        </script>
     </head>
+
+    
     <body>
         <div class="box">
 
@@ -73,30 +143,73 @@
                 <div class=control_group>
                     <h3>Modell</h3>
 
-                    <div id=amino_model_btns class=jmol_radio_group></div>
-                    <br>
-                    <div id=amino_surface_checkbox></div>
-                    <div id=water_molecules></div>
-                    <br>
-                    
-                    
-                    <h3>Färg</h3>
-                    <div id=amino_color_btns class=jmol_radio_group></div>
-                    <br>
+                    <input type="radio" id="amino_ball_and_stick" name="amino_model" value="ball_and_stick" onClick="setStateRadio(this);" checked="checked">
+                    <label for="amino_ball_and_stick">Kul- och pinnmodell</label><br>
+                    <input type="radio" id="amino_spacefill" name="amino_model" value="spacefill" onClick="setStateRadio(this);">
+                    <label for="amino_spacefill">Kalottmodell</label><br>
+                    <input type="radio" id="amino_cartoon" name="amino_model" value="cartoon" onClick="setStateRadio(this);">
+                    <label for="amino_cartoon">Cartoon</label><br>
+                    <input type="radio" id="amino_hide" name="amino_model" value="hide" onClick="setStateRadio(this);">
+                    <label for="amino_hide">Göm</label><br>
 
+                    <br>
+                    <input type="checkbox" id="hydrophobic_surface" name="hydrophobic_surface" onClick="setStateCheck(this);">
+                    <label for="hydrophobic_surface">Hydrofobicitetsfärgad yta</label><br>
+                    <input type="checkbox" id="show_water" name="show_water" onClick="setStateCheck(this);" checked>
+                    <label for="show_water">Visa vattenmolekyler</label><br>
+
+
+
+                    <br>
+                    <h3>Färg</h3>
+
+                    <input type="radio" id="amino_cpk" name="amino_color" value="CPK" onClick="setStateRadio(this);" checked="checked">
+                    <label for="amino_cpk">CPK</label><br>
+                    <input type="radio" id="amino_hydrophobicity" name="amino_color" value="hydrophobicity" onClick="setStateRadio(this);">
+                    <label for="amino_hydrophobicity">Hydrofobicitet</label><br>
+                    <input type="radio" id="amino_sec_structure" name="amino_color" value="sec_structure" onClick="setStateRadio(this);">
+                    <label for="amino_sec_structure">Sekundärstruktur</label><br>
+                    <input type="radio" id="amino_translucent" name="amino_color" value="translucent" onClick="setStateRadio(this);">
+                    <label for="amino_translucent">Genomskinlig</label><br>
+                    <input type="radio" id="amino_green" name="amino_color" value="green" onClick="setStateRadio(this);">
+                    <label for="amino_green">Grön</label><br>
+
+
+
+                    <br>
                     <h3>His64 & His93</h3>
-                    <div id=his_button_1 class=button></div>
-                    <div id=his_button_2 class=button></div>
+
+                    <input type="radio" id="his_same_as_protein" name="his_model" value="same_as_protein" onClick="setStateRadio(this);" checked="checked">
+                    <label for="his_same_as_protein">Samma modell som proteinet</label><br>
+                    <input type="radio" id="his_ball_and_stick" name="his_model" value="ball_and_stick" onClick="setStateRadio(this);">
+                    <label for="his_ball_and_stick">Kul- och pinnmodell (cyan)</label><br>
+                    <input type="radio" id="his_spacefill" name="his_model" value="spacefill" onClick="setStateRadio(this);">
+                    <label for="his_spacefill">Kalottmodell (cyan)</label><br>
 
                 </div>
+                
+
                 <h2>Heme</h2>
                 <div class=control_group>
                     <h3>Modell</h3>
-                    <div id=heme_model_btns class=jmol_radio_group></div>
+
+                    <input type="radio" id="heme_ball_and_stick" name="heme_model" value="ball_and_stick" onClick="setStateRadio(this);" checked="checked">
+                    <label for="heme_ball_and_stick">Kul- och pinnmodell</label><br>
+                    <input type="radio" id="heme_spacefill" name="heme_model" value="spacefill" onClick="setStateRadio(this);">
+                    <label for="heme_spacefill">Kalottmodell</label><br>
+                    <input type="radio" id="heme_hide" name="heme_model" value="hide" onClick="setStateRadio(this);">
+                    <label for="heme_hide">Göm</label><br>
+
+
                     <br>
                     <h3>Färg</h3>
-                    <div id=heme_color_btns class=jmol_radio_group></div>
-                    <br>
+
+                    <input type="radio" id="heme_cpk" name="heme_color" value="CPK" onClick="setStateRadio(this);" checked="checked">
+                    <label for="heme_cpk">CPK</label><br>
+                    <input type="radio" id="heme_purple" name="heme_color" value="purple" onClick="setStateRadio(this);">
+                    <label for="heme_purple">Lila</label><br>
+                </div>
+
                 </div>
             </div>
         </div>
