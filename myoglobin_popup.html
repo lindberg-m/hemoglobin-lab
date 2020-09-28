@@ -25,7 +25,9 @@
                 ]
                 $("#amino_model_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_model, "<br>", "amino_model"))
 
-                $("#his_button").html(Jmol.jmolButton(jmolApplet0, "select his64,his93; wireframe only; wireframe 0.2; spacefill 0.4; color cyan;", "Hightlight His64 & His93"))
+                $("#his_button_1").html(Jmol.jmolButton(jmolApplet0, "display add his64,his93; select his64,his93; wireframe only; wireframe 0.2; spacefill 0.4; color cyan;", "Visa kul- och pinnmodell"))
+                
+                $("#his_button_2").html(Jmol.jmolButton(jmolApplet0, "display add his64,his93; select his64,his93; spacefill; color cyan;", "Visa kalottmodell"))
 
 
                 var r_amino_color = [
@@ -75,11 +77,16 @@
                     <div id=amino_surface_checkbox></div>
                     <div id=water_molecules></div>
                     <br>
-                    <div id=his_button class=button></div>
                     
-                    <br>
+                    
                     <h3>Färg</h3>
                     <div id=amino_color_btns class=jmol_radio_group></div>
+                    <br>
+
+                    <h3>His64 & His93</h3>
+                    <div id=his_button_1 class=button></div>
+                    <div id=his_button_2 class=button></div>
+
                 </div>
                 <h2>Heme</h2>
                 <div class=control_group>
@@ -88,6 +95,7 @@
                     <br>
                     <h3>Färg</h3>
                     <div id=heme_color_btns class=jmol_radio_group></div>
+                    <br>
                 </div>
 <!-- 
                 <h2>His 64,93</h2>
