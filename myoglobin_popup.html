@@ -36,19 +36,17 @@
                 $("#amino_surface_checkbox").html(Jmol.jmolCheckbox(
                     jmolApplet0,"isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl","isosurface off","Hydrofob yta"))
 
+                $("#water_molecules").html(Jmol.jmolCheckbox(
+                    jmolApplet0,"display all","hide water","Water molecules"))
 
                 var r2 = [
                     ["select hem546; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "Kul- och pinnmodell", true],
                     ["select hem546; spacefill only; color cpk", "Kalottmodell"]
                 ]
                 $("#hemebtns").html(Jmol.jmolRadioGroup(jmolApplet0, r2, "<br>", "Heme"))
-
-
-
         })
 
     </script>
-
     </head>
     <body>
         <div class="box">
@@ -60,9 +58,9 @@
                     <div id=amino_model_btns class=jmol_radio_group></div>
                     <br>
                     <div id=amino_surface_checkbox></div>
+                    <div id=water_molecules></div>
                     <br>
                     <div id=amino_color_btns class=jmol_radio_group></div>
-
 
                     <h3>Heme</h3>
                     <div id=hemebtns class=jmol_radio_group></div>
