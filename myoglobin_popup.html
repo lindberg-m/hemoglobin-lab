@@ -18,26 +18,26 @@
                 Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB; delete [SO4]545")
 
                 var r_amino_model = [
-                    ["select amino; wireframe only; wireframe 0.2; spacefill 0.4;", "Kul- och pinnmodell", true],
-                    ["select amino; spacefill only;", "Kalottmodell"],
-                    ["select amino; cartoon only;", "Cartoon"],
-                    ["select amino; cartoon only; cartoon off;", "Göm"]
+                    ["display add amino; select amino; wireframe only; wireframe 0.2; spacefill 0.4;", "Kul- och pinnmodell", true],
+                    ["display add amino; select amino; spacefill only;", "Kalottmodell"],
+                    ["display add amino; select amino; cartoon only;", "Cartoon"],
+                    ["hide amino;", "Göm"]
                 ]
-                $("#amino_model_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_model, "<br>", "Protein"))
+                $("#amino_model_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_model, "<br>", "amino_model"))
 
                 var r_amino_color = [
                     ["select amino; color cpk", "CPK", true],
                     ["select (amino and polar); color red; select (amino and hydrophobic); color blue;", "Hydrofobicitet"],
                     ["select amino; color red", "Röd"]
                 ]
-                $("#amino_color_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_color, "<br>", "wefwef"))
+                $("#amino_color_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_color, "<br>", "amino_color"))
 
 
                 $("#amino_surface_checkbox").html(Jmol.jmolCheckbox(
                     jmolApplet0,"isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl","isosurface off","Hydrofob yta"))
 
                 $("#water_molecules").html(Jmol.jmolCheckbox(
-                    jmolApplet0,"display all","hide water","Water molecules"))
+                    jmolApplet0, "display add water","hide water", "Water molecules", true))
 
                 var r2 = [
                     ["select hem546; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "Kul- och pinnmodell", true],
