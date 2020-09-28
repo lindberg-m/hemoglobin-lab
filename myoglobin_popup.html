@@ -33,8 +33,9 @@
                 var r_amino_color = [
                     ["select amino; color cpk", "CPK", true],
                     ["select (amino and polar); color red; select (amino and hydrophobic); color blue;", "Hydrofobicitet"],
-                    ["select amino; color red", "Röd"],
-                    ["select amino; color TRANSLUCENT", "Genomskinlig"]
+                    ["select amino; color structure", "Sekundärstruktur"],
+                    ["select amino; color TRANSLUCENT", "Genomskinlig"],
+                    ["select amino; color green", "Grön"]
                 ]
                 $("#amino_color_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_amino_color, "<br>", "amino_color"))
 
@@ -43,11 +44,11 @@
                     jmolApplet0,"isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl","isosurface off","Hydrofob yta"))
 
                 $("#water_molecules").html(Jmol.jmolCheckbox(
-                    jmolApplet0, "display add water","hide add water", "Water molecules", true))
+                    jmolApplet0, "display add water","hide add water", "Visa vattenmolekyler", true))
 
                 var r_heme_model = [
-                    ["display add hem546; select hem546; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "Kul- och pinnmodell", true],
-                    ["display add hem546; select hem546; spacefill only; color cpk", "Kalottmodell"],
+                    ["display add hem546; select hem546; wireframe only; wireframe 0.2; spacefill 0.4", "Kul- och pinnmodell", true],
+                    ["display add hem546; select hem546; spacefill only", "Kalottmodell"],
                     ["hide add hem546;", "Göm"]
                 ]
                 $("#heme_model_btns").html(Jmol.jmolRadioGroup(jmolApplet0, r_heme_model, "<br>", "Heme_model"))
@@ -97,11 +98,6 @@
                     <div id=heme_color_btns class=jmol_radio_group></div>
                     <br>
                 </div>
-<!-- 
-                <h2>His 64,93</h2>
-                <div class=control_group>
-
-                </div> -->
             </div>
         </div>
     </body>
