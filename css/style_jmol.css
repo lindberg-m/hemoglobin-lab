@@ -32,3 +32,18 @@ body {
 .controls {
 	padding: 20px;
 }
+
+
+.control_group {
+	padding-left: 20px
+}
+
+h2 {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+h3 {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
