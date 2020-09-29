@@ -19,7 +19,8 @@
                         ["heme_model", "ball_and_stick"],
                         ["heme_color", "CPK"],
                         ["hydrophobic_surface", "false"],
-                        ["show_water", "true"]
+                        ["show_water", "true"],
+                        ["cross_section", "off"]
                         ]);
 
             function refreshJMol(state) {
@@ -101,6 +102,27 @@
                     case false:
                     s = s + "isosurface off;";
                     break;
+                }
+                switch( state.get("cross_section") ) {
+                    case "off":
+                    s = s + "slab off;"
+                    break;
+                    case "70":
+                    s = s + "slab 70; slab on;"
+                    break;
+                    case "60":
+                    s = s + "slab 60; slab on;"
+                    break;
+                    case "50":
+                    s = s + "slab 50; slab on;"
+                    break;
+                    case "40":
+                    s = s + "slab 40; slab on;"
+                    break;
+                    case "30":
+                    s = s + "slab 30; slab on;"
+                    break;
+
                 }
 
 
@@ -208,11 +230,28 @@
                     <label for="heme_cpk">CPK</label><br>
                     <input type="radio" id="heme_purple" name="heme_color" value="purple" onClick="setStateRadio(this);">
                     <label for="heme_purple">Lila</label><br>
-                    <br>
-                    <br>
+                    
                 </div>
 
+                <h2>Tvärsnitt</h2>
+                <div class=control_group>
+
+                    <input type="radio" id="cross_section_off" name="cross_section" value="off" onClick="setStateRadio(this);" checked="checked">
+                    <label for="cross_section_off">Av</label><br>
+                    <input type="radio" id="cross_section_70" name="cross_section" value="70" onClick="setStateRadio(this);">
+                    <label for="cross_section_70">30 %</label><br>
+                    <input type="radio" id="cross_section_60" name="cross_section" value="60" onClick="setStateRadio(this);">
+                    <label for="cross_section_60">40 %</label><br>
+                    <input type="radio" id="cross_section_50" name="cross_section" value="50" onClick="setStateRadio(this);">
+                    <label for="cross_section_50">50 %</label><br>
+                    <input type="radio" id="cross_section_40" name="cross_section" value="40" onClick="setStateRadio(this);">
+                    <label for="cross_section_40">60 %</label><br>
+                    <input type="radio" id="cross_section_30" name="cross_section" value="30" onClick="setStateRadio(this);">
+                    <label for="cross_section_30">70 %</label><br>
+
                 </div>
+                <br>
+                <br>
             </div>
         </div>
     </body>
