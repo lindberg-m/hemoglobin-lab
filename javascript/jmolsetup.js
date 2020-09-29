@@ -13,7 +13,7 @@ $(document).ready(
             serverURL: "jsmol/jsmol/php/jsmol.php",
             use: "HTML5",
             readyFunction: null,
-            script: "set zoomLarge off;"
+            script: "set zoomLarge off; set language sv;"
         }
 
         $("#jmolpane").html(Jmol.getAppletHtml("jmolApplet0",Info))
