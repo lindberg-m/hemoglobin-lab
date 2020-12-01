@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Myoglobin</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style_jmol.css">
+
+
+        <script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
+        <script type="text/javascript" src="javascript/jmolsetup.js"></script>
+
+
+
+        <script type="text/javascript">
+            let global_state = new Map([
+                        ["amino_model", "ball_and_stick"],
+                        ["amino_color", "CPK"],
+                        /* ["his_model", "same_as_protein"],
+                        ["heme_model", "ball_and_stick"],
+                        ["heme_color", "CPK"], */
+                        ["hydrophobic_surface", "false"],
+                        ["show_water", "true"],
+                        ["cross_section", "off"
+                        ]);
+
+            function refreshJMol(state) {
+
+                let s = ""; 
+                switch( state.get("amino_model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add amino; select amino; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    break;
+                    case "spacefill":
+                    s = s + "display add amino; select amino; spacefill only;";
+                    break;
+                    case "cartoon":
+                    s = s + "display add amino; select amino; cartoon only;";
+                    break;
+                    case "hide":
+                    s = s + "hide add amino;";
+                    break;
+                }
+                switch( state.get("amino_color") ){
+                    case "CPK":
+                    s = s + "select amino; color cpk;";
+                    break;
+                    case "hydrophobicity":
+                    s = s + "select (amino and polar); color red; select (amino and hydrophobic); color blue;";
+                    break;
+                    case "sec_structure":
+                    s = s + "select amino; color structure;";
+                    break;
+                    case "translucent":
+                    s = s + "select amino; color cpk; color TRANSLUCENT;";
+                    break;
+                    case "green":
+                    s = s + "select amino; color green;";
+                    break;
+                }
+                /* switch( state.get("his_model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add his64,his93; select his64,his93; wireframe only; wireframe 0.2; spacefill 0.4; color cyan;";
+                    break;
+                    case "spacefill":
+                    s = s + "display add his64,his93; select his64,his93; spacefill; color cyan;";
+                    break;
+                }
+                
+                switch( state.get("heme_model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add hem546; select hem546; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    break;
+                    case "spacefill":
+                    s = s + "display add hem546; select hem546; spacefill only;";
+                    break;
+                    case "cartoon":
+                    s = s + "display add hem546; select hem546; cartoon only;";
+                    break;
+                    case "hide":
+                    s = s + "hide add hem546;";
+                    break;
+                }
+                switch( state.get("heme_color") ){
+                    case "CPK":
+                    s = s + "select hem546; color cpk;";
+                    break;
+                    case "purple":
+                    s = s + "select hem546; color purple;";
+                    break;
+                }
+                */
+                switch( state.get("show_water") ) {
+                    case true:
+                    s = s + "display add water;";
+                    break;
+                    case false:
+                    s = s + "hide add water;";
+                    break;
+                }
+                switch( state.get("hydrophobic_surface") ) {
+                    case true:
+                    s = s + "isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl;";
+                    break;
+                    case false:
+                    s = s + "isosurface off;";
+                    break;
+                }
+                switch( state.get("cross_section") ) {
+                    case "off":
+                    s = s + "slab off;"
+                    break;
+                    case "70":
+                    s = s + "slab 70; slab on;"
+                    break;
+                    case "60":
+                    s = s + "slab 60; slab on;"
+                    break;
+                    case "50":
+                    s = s + "slab 50; slab on;"
+                    break;
+                    case "40":
+                    s = s + "slab 40; slab on;"
+                    break;
+                    case "30":
+                    s = s + "slab 30; slab on;"
+                    break;
+
+                }
+
+
+                Jmol.script(jmolApplet0, s);
+            }
+
+            function setStateRadio(radio) {
+                global_state.set(radio.name, radio.value);
+                refreshJMol(global_state);
+            }
+
+            function setStateCheck(checkbox) {
+                global_state.set(checkbox.name, checkbox.checked);
+                refreshJMol(global_state);
+            }
+        </script>
+
+
+
+        <!-- Initial jmol script to run (already initiated) -->
+        <script type="text/javascript">
+            $(document).ready(
+                function(){
+                    // Ändra kommandot nedan för att ladda andra grejer
+                    Jmol.script(jmolApplet0, "load models/covid_spike.pdb;")
+                    refreshJMol(global_state);
+            })
+        </script>
+    </head>
+
+    
+    <body>
+        <div class="box">
+
+            <span id=jmolpane class=jmolpane></span>
+
+            <div class=controls>
+                
+                <h2>Protein</h2>
+                <div class=control_group>
+                    <h3>Modell</h3>
+
+                    <input type="radio" id="amino_ball_and_stick" name="amino_model" value="ball_and_stick" onClick="setStateRadio(this);" checked="checked">
+                    <label for="amino_ball_and_stick">Kul- och pinnmodell</label><br>
+                    <input type="radio" id="amino_spacefill" name="amino_model" value="spacefill" onClick="setStateRadio(this);">
+                    <label for="amino_spacefill">Kalottmodell</label><br>
+                    <input type="radio" id="amino_cartoon" name="amino_model" value="cartoon" onClick="setStateRadio(this);">
+                    <label for="amino_cartoon">Cartoon</label><br>
+                    <input type="radio" id="amino_hide" name="amino_model" value="hide" onClick="setStateRadio(this);">
+                    <label for="amino_hide">Dölj</label><br>
+
+                    <br>
+                    <input type="checkbox" id="hydrophobic_surface" name="hydrophobic_surface" onClick="setStateCheck(this);">
+                    <label for="hydrophobic_surface">Hydrofobicitetsfärgad yta</label><br>
+                    <input type="checkbox" id="show_water" name="show_water" onClick="setStateCheck(this);" checked>
+                    <label for="show_water">Visa vattenmolekyler</label><br>
+
+
+
+                    <br>
+                    <h3>Färg</h3>
+
+                    <input type="radio" id="amino_cpk" name="amino_color" value="CPK" onClick="setStateRadio(this);" checked="checked">
+                    <label for="amino_cpk">CPK</label><br>
+                    <input type="radio" id="amino_hydrophobicity" name="amino_color" value="hydrophobicity" onClick="setStateRadio(this);">
+                    <label for="amino_hydrophobicity">Hydrofobicitet</label><br>
+                    <input type="radio" id="amino_sec_structure" name="amino_color" value="sec_structure" onClick="setStateRadio(this);">
+                    <label for="amino_sec_structure">Sekundärstruktur</label><br>
+                    <input type="radio" id="amino_translucent" name="amino_color" value="translucent" onClick="setStateRadio(this);">
+                    <label for="amino_translucent">Genomskinlig</label><br>
+                    <input type="radio" id="amino_green" name="amino_color" value="green" onClick="setStateRadio(this);">
+                    <label for="amino_green">Grön</label><br>
+
+
+
+                    <br>
+                    <!-- 
+                    <h3>His64 & His93</h3>
+
+                    <input type="radio" id="his_same_as_protein" name="his_model" value="same_as_protein" onClick="setStateRadio(this);" checked="checked">
+                    <label for="his_same_as_protein">Samma som resten av proteinet</label><br>
+                    <input type="radio" id="his_ball_and_stick" name="his_model" value="ball_and_stick" onClick="setStateRadio(this);">
+                    <label for="his_ball_and_stick">Kul- och pinnmodell (cyan)</label><br>
+                    <input type="radio" id="his_spacefill" name="his_model" value="spacefill" onClick="setStateRadio(this);">
+                    <label for="his_spacefill">Kalottmodell (cyan)</label><br>
+                    -->
+
+                </div>
+                
+                <!--
+                <h2>Hemgrupp</h2>
+                <div class=control_group>
+                    <h3>Modell</h3>
+
+                    <input type="radio" id="heme_ball_and_stick" name="heme_model" value="ball_and_stick" onClick="setStateRadio(this);" checked="checked">
+                    <label for="heme_ball_and_stick">Kul- och pinnmodell</label><br>
+                    <input type="radio" id="heme_spacefill" name="heme_model" value="spacefill" onClick="setStateRadio(this);">
+                    <label for="heme_spacefill">Kalottmodell</label><br>
+                    <input type="radio" id="heme_hide" name="heme_model" value="hide" onClick="setStateRadio(this);">
+                    <label for="heme_hide">Dölj</label><br>
+
+
+                    <br>
+                    <h3>Färg</h3>
+
+                    <input type="radio" id="heme_cpk" name="heme_color" value="CPK" onClick="setStateRadio(this);" checked="checked">
+                    <label for="heme_cpk">CPK</label><br>
+                    <input type="radio" id="heme_purple" name="heme_color" value="purple" onClick="setStateRadio(this);">
+                    <label for="heme_purple">Lila</label><br>
+                    
+                </div>
+                -->
+
+                <h2>Tvärsnitt</h2>
+                <div class=control_group>
+
+                    <input type="radio" id="cross_section_off" name="cross_section" value="off" onClick="setStateRadio(this);" checked="checked">
+                    <label for="cross_section_off">Av</label><br>
+                    <input type="radio" id="cross_section_70" name="cross_section" value="70" onClick="setStateRadio(this);">
+                    <label for="cross_section_70">30 %</label><br>
+                    <input type="radio" id="cross_section_60" name="cross_section" value="60" onClick="setStateRadio(this);">
+                    <label for="cross_section_60">40 %</label><br>
+                    <input type="radio" id="cross_section_50" name="cross_section" value="50" onClick="setStateRadio(this);">
+                    <label for="cross_section_50">50 %</label><br>
+                    <input type="radio" id="cross_section_40" name="cross_section" value="40" onClick="setStateRadio(this);">
+                    <label for="cross_section_40">60 %</label><br>
+                    <input type="radio" id="cross_section_30" name="cross_section" value="30" onClick="setStateRadio(this);">
+                    <label for="cross_section_30">70 %</label><br>
+
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </body>
+</html>
