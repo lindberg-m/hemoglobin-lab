@@ -33,6 +33,12 @@ body {
 	padding: 20px;
 }
 
+.anim_controls {
+	text-decoration: none;
+	display: flex;
+	justify-content: space-between;
+
+}
 
 .control_group {
 	padding-left: 20px;
