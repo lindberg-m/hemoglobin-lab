@@ -13,10 +13,12 @@
 
         <script type="text/javascript">
             let global_state = new Map([
-                        ["amino_model", "ball_and_stick"],
-                        ["amino_color", "CPK"],
+                        ["amino_model", "cartoon"],
+                        ["amino_color", "chain"],
+                        ["heme_model", "ball_and_stick"],
                         ["cross_section", "off"],
-                        ["show_dg2", false]
+                        ["show_dg2", false],
+                        ["mark_bohr", false]
                         ]);
 
             function refreshJMol(state) {
@@ -24,43 +26,66 @@
                 let s = ""; 
                 switch( state.get("amino_model") ) {
                     case "ball_and_stick":
-                    s = s + "display add amino; select amino; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    s = s + "display add amino; select amino; wireframe only; wireframe 0.2; spacefill 0.4;"
                     break;
                     case "spacefill":
-                    s = s + "display add amino; select amino; spacefill only;";
+                    s = s + "display add amino; select amino; spacefill only;"
                     break;
                     case "cartoon":
-                    s = s + "display add amino; select amino; cartoon only;";
+                    s = s + "display add amino; select amino; cartoon only;"
                     break;
                     case "hide":
-                    s = s + "hide add amino;";
+                    s = s + "hide add amino;"
                     break;
                 }
                 switch( state.get("amino_color") ){
                     case "CPK":
-                    s = s + "select amino; color cpk;";
+                    s = s + "select amino; color cpk;"
+                    break;
+                    case "chain":
+                    s = s + "select :a; color [xf0243c]; select :b; color [xf0d524]; select :c; color [xed808d]; select :d; color [xf0e17f];"
+                    s = s + "set echo lab_chainA 5% 90%; echo α1; color echo [xf0243c];"
+                    s = s + "set echo lab_chainC 5% 85%; echo α2; color echo [xed808d];"
+                    s = s + "set echo lab_chainB 5% 80%; echo β1; color echo [xf0d524];"
+                    s = s + "set echo lab_chainD 5% 75%; echo β2; color echo [xf0e17f];"
                     break;
                     case "hydrophobicity":
-                    s = s + "select (amino and polar); color red; select (amino and hydrophobic); color blue;";
+                    s = s + "select (amino and polar); color red; select (amino and hydrophobic); color blue;"
                     break;
                     case "sec_structure":
-                    s = s + "select amino; color structure;";
+                    s = s + "select amino; color structure;"
                     break;
-                    case "translucent":
-                    s = s + "select amino; color cpk; color TRANSLUCENT;";
+                }
+                if(state.get("amino_color") != "chain"){
+                    s = s + "set echo lab_chainA off; set echo lab_chainB off; set echo lab_chainC off; set echo lab_chainD off;";
+                }
+                switch( state.get("heme_model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add (hem142 | hem147 | OXY143 | OXY148); select (hem142 | hem147 | OXY143 | OXY148); wireframe only; wireframe 0.2; spacefill 0.4;";
                     break;
-                    case "green":
-                    s = s + "select amino; color green;";
+                    case "spacefill":
+                    s = s + "display add (hem142 | hem147 | OXY143 | OXY148); select (hem142 | hem147 | OXY143 | OXY148); spacefill only;";
+                    break;
+                    case "hide":
+                    s = s + "hide add (hem142 | hem147 | OXY143 | OXY148);";
                     break;
                 }
                 switch( state.get("show_dg2") ) {
                     case true:
-                    s = s + "display add :k;";
+                    s = s + "display add :k; select :k; spacefill;"
+                    s = s + "select :k.P1; label DG2; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
                     break;
                     case false:
-                    s = s + "hide add :k;";
+                    s = s + "hide add :k;"
                     break;
                 }
+                switch( state.get("mark_bohr") ) {
+                    case true:
+                    s = s + "select (Lys40 & (:a|:c)) | (Asp94 & (:b|:d)) | (His146 & (:b|:d)); spacefill;"
+                    s = s + "select Lys40.CA & (:a|:c); label Lys40; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
+                    s = s + "select Asp94.CA & (:b|:d); label Asp94; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
+                    s = s + "select His146.CA & (:b|:d); label His146; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
+                    break;                }
                 switch( state.get("cross_section") ) {
                     case "off":
                     s = s + "slab off;"
@@ -105,7 +130,7 @@
             $(document).ready(
                 function(){
                     // Ändra kommandot nedan för att ladda andra grejer
-                    Jmol.script(jmolApplet0, "load models/2dn2_2dn1_morph_with_dg2.pdb; anim frame [1-11]; anim mode palindrome; anim on;") 
+                    Jmol.script(jmolApplet0, "load models/2dn2_2dn1_morph_with_dg2.pdb; anim frame [1-11]; anim mode palindrome 2 2; anim on;") 
                     refreshJMol(global_state);
             })
         </script>
@@ -139,7 +164,7 @@
                     <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame next;')">
                         <img src="media/next.png" title="Next frame" height="20">
                     </a>
-                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame 11;')">
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame last;')">
                         <img src="media/oxy.png" title="oxyhemoglobin frame" height="20">
                     </a>          
                 </div>
@@ -152,45 +177,40 @@
                 <div class=control_group>
                     <h3>Modell</h3>
 
-                    <input type="radio" id="amino_ball_and_stick" name="amino_model" value="ball_and_stick" onClick="setStateRadio(this);" checked="checked">
+                    <input type="radio" id="amino_ball_and_stick" name="amino_model" value="ball_and_stick" onClick="setStateRadio(this);">
                     <label for="amino_ball_and_stick">Kul- och pinnmodell</label><br>
                     <input type="radio" id="amino_spacefill" name="amino_model" value="spacefill" onClick="setStateRadio(this);">
                     <label for="amino_spacefill">Kalottmodell</label><br>
-                    <input type="radio" id="amino_cartoon" name="amino_model" value="cartoon" onClick="setStateRadio(this);">
+                    <input type="radio" id="amino_cartoon" name="amino_model" value="cartoon" onClick="setStateRadio(this);" checked="checked">
                     <label for="amino_cartoon">Cartoon</label><br>
                     <input type="radio" id="amino_hide" name="amino_model" value="hide" onClick="setStateRadio(this);">
                     <label for="amino_hide">Dölj</label><br>
 
-                    <br>
-                    <input type="checkbox" id="hydrophobic_surface" name="hydrophobic_surface" onClick="setStateCheck(this);">
-                    <label for="hydrophobic_surface">Hydrofobicitetsfärgad yta</label><br>
-                    <input type="checkbox" id="show_water" name="show_water" onClick="setStateCheck(this);" checked>
-                    <label for="show_water">Visa vattenmolekyler</label><br>
-
+ 
 
 
                     <br>
                     <h3>Färg</h3>
 
-                    <input type="radio" id="amino_cpk" name="amino_color" value="CPK" onClick="setStateRadio(this);" checked="checked">
+                    <input type="radio" id="amino_cpk" name="amino_color" value="CPK" onClick="setStateRadio(this);">
                     <label for="amino_cpk">CPK</label><br>
+                    <input type="radio" id="amino_chain" name="amino_color" value="chain" onClick="setStateRadio(this);" checked="checked">
+                    <label for="amino_chain">Kedja</label><br>
                     <input type="radio" id="amino_hydrophobicity" name="amino_color" value="hydrophobicity" onClick="setStateRadio(this);">
                     <label for="amino_hydrophobicity">Hydrofobicitet</label><br>
                     <input type="radio" id="amino_sec_structure" name="amino_color" value="sec_structure" onClick="setStateRadio(this);">
                     <label for="amino_sec_structure">Sekundärstruktur</label><br>
-                    <input type="radio" id="amino_translucent" name="amino_color" value="translucent" onClick="setStateRadio(this);">
-                    <label for="amino_translucent">Genomskinlig</label><br>
-                    <input type="radio" id="amino_green" name="amino_color" value="green" onClick="setStateRadio(this);">
-                    <label for="amino_green">Grön</label><br>
 
 
                 </div>
 
 
-                <h2>Titel av något slag</h2>
+                <h2>Highlights</h2>
                 <div class=control_group>
                     <input type="checkbox" id="show_dg2" name="show_dg2" onClick="setStateCheck(this);">
                     <label for="show_dg2">Visa DG2 (deoxy)</label><br>
+                    <input type="checkbox" id="mark_bohr" name="mark_bohr" onClick="setStateCheck(this);">
+                    <label for="mark_bohr">Märk ut aa för Bohrs effekt</label><br>
                 </div>
 
 
@@ -207,14 +227,6 @@
                     <input type="radio" id="heme_hide" name="heme_model" value="hide" onClick="setStateRadio(this);">
                     <label for="heme_hide">Dölj</label><br>
 
-
-                    <br>
-                    <h3>Färg</h3>
-
-                    <input type="radio" id="heme_cpk" name="heme_color" value="CPK" onClick="setStateRadio(this);" checked="checked">
-                    <label for="heme_cpk">CPK</label><br>
-                    <input type="radio" id="heme_purple" name="heme_color" value="purple" onClick="setStateRadio(this);">
-                    <label for="heme_purple">Lila</label><br>
                     
                 </div>
 
