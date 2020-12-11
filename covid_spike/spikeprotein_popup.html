@@ -16,12 +16,14 @@
             let global_state = new Map([
                         ["amino_model", "ball_and_stick"],
                         ["amino_color", "CPK"],
-                        /* ["his_model", "same_as_protein"],
+                        /*
+                        ["his_model", "same_as_protein"],
                         ["heme_model", "ball_and_stick"],
-                        ["heme_color", "CPK"], */
+                        ["heme_color", "CPK"], 
+                        */
                         ["hydrophobic_surface", "false"],
                         ["show_water", "true"],
-                        ["cross_section", "off"
+                        ["cross_section", "off"]
                         ]);
 
             function refreshJMol(state) {
@@ -58,7 +60,8 @@
                     s = s + "select amino; color green;";
                     break;
                 }
-                /* switch( state.get("his_model") ) {
+                /*
+                switch( state.get("his_model") ) {
                     case "ball_and_stick":
                     s = s + "display add his64,his93; select his64,his93; wireframe only; wireframe 0.2; spacefill 0.4; color cyan;";
                     break;
@@ -90,6 +93,7 @@
                     break;
                 }
                 */
+                
                 switch( state.get("show_water") ) {
                     case true:
                     s = s + "display add water;";
@@ -151,6 +155,7 @@
                 function(){
                     // Ändra kommandot nedan för att ladda andra grejer
                     Jmol.script(jmolApplet0, "load models/covid_spike.pdb;")
+                    //Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB;")
                     refreshJMol(global_state);
             })
         </script>
@@ -202,9 +207,8 @@
 
 
                     <br>
-                    <!-- 
+                    <!--
                     <h3>His64 & His93</h3>
-
                     <input type="radio" id="his_same_as_protein" name="his_model" value="same_as_protein" onClick="setStateRadio(this);" checked="checked">
                     <label for="his_same_as_protein">Samma som resten av proteinet</label><br>
                     <input type="radio" id="his_ball_and_stick" name="his_model" value="ball_and_stick" onClick="setStateRadio(this);">
@@ -214,7 +218,6 @@
                     -->
 
                 </div>
-                
                 <!--
                 <h2>Hemgrupp</h2>
                 <div class=control_group>
