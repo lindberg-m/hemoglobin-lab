@@ -18,7 +18,8 @@
                         ["heme_model", "ball_and_stick"],
                         ["cross_section", "off"],
                         ["show_dg2", false],
-                        ["mark_bohr", false]
+                        ["mark_bohr", false],
+                        ["mark_sickle", false]
                         ]);
 
             function refreshJMol(state) {
@@ -85,7 +86,17 @@
                     s = s + "select Lys40.CA & (:a|:c); label Lys40; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
                     s = s + "select Asp94.CA & (:b|:d); label Asp94; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
                     s = s + "select His146.CA & (:b|:d); label His146; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
-                    break;                }
+                    break;
+                }
+                switch( state.get("mark_sickle") ) {
+                    case true:
+                    s = s + "select (Glu6 & (:b|:d)); spacefill; color red;" // Den är polär
+                    s = s + "select Glu6.CA & (:b|:d); label Glu6; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
+                    s = s + "select (Phe85 & (:b|:d)) | (Leu88 & (:b|:d)); spacefill; color blue;" // De är hydrofoba
+                    s = s + "select Phe85.CA & (:b|:d); label Phe85; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
+                    s = s + "select Leu88.CA & (:b|:d); label Leu88; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
+                    break;
+                }
                 switch( state.get("cross_section") ) {
                     case "off":
                     s = s + "slab off;"
@@ -211,6 +222,8 @@
                     <label for="show_dg2">Visa DG2 (deoxy)</label><br>
                     <input type="checkbox" id="mark_bohr" name="mark_bohr" onClick="setStateCheck(this);">
                     <label for="mark_bohr">Märk ut aa för Bohrs effekt</label><br>
+                    <input type="checkbox" id="mark_sickle" name="mark_sickle" onClick="setStateCheck(this);">
+                    <label for="mark_sickle">Märk ut aa för sickelcellanemi (färg: hydrofobicitet)</label><br>
                 </div>
 
 
