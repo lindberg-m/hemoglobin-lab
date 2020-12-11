@@ -15,7 +15,8 @@
             let global_state = new Map([
                         ["amino_model", "ball_and_stick"],
                         ["amino_color", "CPK"],
-                        ["cross_section", "off"]
+                        ["cross_section", "off"],
+                        ["show_dg2", false]
                         ]);
 
             function refreshJMol(state) {
@@ -50,6 +51,14 @@
                     break;
                     case "green":
                     s = s + "select amino; color green;";
+                    break;
+                }
+                switch( state.get("show_dg2") ) {
+                    case true:
+                    s = s + "display add :k;";
+                    break;
+                    case false:
+                    s = s + "hide add :k;";
                     break;
                 }
                 switch( state.get("cross_section") ) {
@@ -175,6 +184,13 @@
                     <label for="amino_green">Grön</label><br>
 
 
+                </div>
+
+
+                <h2>Titel av något slag</h2>
+                <div class=control_group>
+                    <input type="checkbox" id="show_dg2" name="show_dg2" onClick="setStateCheck(this);">
+                    <label for="show_dg2">Visa DG2 (deoxy)</label><br>
                 </div>
 
 
