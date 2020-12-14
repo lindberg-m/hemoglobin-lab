@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Myoglobin</title>
+        <title>Hemoglobin</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/style_jmol.css">
 
@@ -45,10 +45,10 @@
                     break;
                     case "chain":
                     s = s + "select :a; color [xf0243c]; select :b; color [xf0d524]; select :c; color [xed808d]; select :d; color [xf0e17f];"
-                    s = s + "set echo lab_chainA 5% 90%; echo α1; color echo [xf0243c];"
-                    s = s + "set echo lab_chainC 5% 85%; echo α2; color echo [xed808d];"
-                    s = s + "set echo lab_chainB 5% 80%; echo β1; color echo [xf0d524];"
-                    s = s + "set echo lab_chainD 5% 75%; echo β2; color echo [xf0e17f];"
+                    s = s + "set echo echo_chainA 5% 90%; echo α1; color echo [xf0243c];"
+                    s = s + "set echo echo_chainC 5% 85%; echo α2; color echo [xed808d];"
+                    s = s + "set echo echo_chainB 5% 80%; echo β1; color echo [xf0d524];"
+                    s = s + "set echo echo_chainD 5% 75%; echo β2; color echo [xf0e17f];"
                     break;
                     case "hydrophobicity":
                     s = s + "select (amino and polar); color red; select (amino and hydrophobic); color blue;"
@@ -58,7 +58,13 @@
                     break;
                 }
                 if(state.get("amino_color") != "chain"){
-                    s = s + "set echo lab_chainA off; set echo lab_chainB off; set echo lab_chainC off; set echo lab_chainD off;";
+                    s = s + "set echo echo_chainA off; set echo echo_chainB off; set echo echo_chainC off; set echo echo_chainD off;";
+                }
+                if(state.get("amino_color") == "hydrophobicity" | state.get("mark_sickle")){
+                	s = s + "set echo echo_polar 5% 15%; echo Polar; color echo red;"
+                    s = s + "set echo echo_hydrophobic 5% 10%; echo Hydrophobic; color echo blue;"
+                } else {
+                	s = s + "set echo echo_polar off; set echo echo_hydrophobic off;"
                 }
                 switch( state.get("heme_model") ) {
                     case "ball_and_stick":

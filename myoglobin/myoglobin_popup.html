@@ -57,6 +57,12 @@
                     s = s + "select amino; color green;";
                     break;
                 }
+                if(state.get("amino_color") == "hydrophobicity" | state.get("hydrophobic_surface")){
+                    s = s + "set echo echo_polar 5% 15%; echo Polar; color echo red;"
+                    s = s + "set echo echo_hydrophobic 5% 10%; echo Hydrophobic; color echo blue;"
+                } else {
+                    s = s + "set echo echo_polar off; set echo echo_hydrophobic off;"
+                }
                 switch( state.get("his_model") ) {
                     case "ball_and_stick":
                     s = s + "display add his64,his93; select his64,his93; wireframe only; wireframe 0.2; spacefill 0.4; color cyan;";
