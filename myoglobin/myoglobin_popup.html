@@ -73,16 +73,16 @@
                 }
                 switch( state.get("heme_model") ) {
                     case "ball_and_stick":
-                    s = s + "display add hem155; select hem155; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    s = s + "display add (hem155 | oxy); select (hem155 | oxy); wireframe only; wireframe 0.2; spacefill 0.4;";
                     break;
                     case "spacefill":
-                    s = s + "display add hem155; select hem155; spacefill only;";
+                    s = s + "display add (hem155 | oxy); select (hem155 | oxy); spacefill only;";
                     break;
                     case "cartoon":
-                    s = s + "display add hem155; select hem155; cartoon only;";
+                    s = s + "display add (hem155 | oxy); select (hem155 | oxy); cartoon only;";
                     break;
                     case "hide":
-                    s = s + "hide add hem155;";
+                    s = s + "hide add (hem155 | oxy);";
                     break;
                 }
                 switch( state.get("heme_color") ){
@@ -128,7 +128,10 @@
                     case "30":
                     s = s + "slab 30; slab on;"
                     break;
-
+                }
+                // Det blir inte kopplingar mellan järnet och prox.his eller till O2 om man inte specificerar wireframe efter att allt är valt.
+                if(state.get("amino_model") == "ball_and_stick" & state.get("heme_model") == "ball_and_stick"){
+                    s = s + "select all; wireframe 0.2; spacefill 0.4;"
                 }
 
 

@@ -124,6 +124,10 @@
                     break;
 
                 }
+                // Det blir inte kopplingar mellan järnet och prox.his eller till O2 om man inte specificerar wireframe efter att allt är valt.
+                if(state.get("amino_model") == "ball_and_stick" & state.get("heme_model") == "ball_and_stick"){
+                    s = s + "select all; wireframe 0.2; spacefill 0.4;"
+                }
 
 
                 Jmol.script(jmolApplet0, s);
