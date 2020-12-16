@@ -73,24 +73,24 @@
                 }
                 switch( state.get("heme_model") ) {
                     case "ball_and_stick":
-                    s = s + "display add hem546; select hem546; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    s = s + "display add hem155; select hem155; wireframe only; wireframe 0.2; spacefill 0.4;";
                     break;
                     case "spacefill":
-                    s = s + "display add hem546; select hem546; spacefill only;";
+                    s = s + "display add hem155; select hem155; spacefill only;";
                     break;
                     case "cartoon":
-                    s = s + "display add hem546; select hem546; cartoon only;";
+                    s = s + "display add hem155; select hem155; cartoon only;";
                     break;
                     case "hide":
-                    s = s + "hide add hem546;";
+                    s = s + "hide add hem155;";
                     break;
                 }
                 switch( state.get("heme_color") ){
                     case "CPK":
-                    s = s + "select hem546; color cpk;";
+                    s = s + "select hem155; color cpk;";
                     break;
                     case "purple":
-                    s = s + "select hem546; color purple;";
+                    s = s + "select hem155; color purple;";
                     break;
                 }
                 switch( state.get("show_water") ) {
@@ -153,7 +153,7 @@
             $(document).ready(
                 function(){
                     // Ändra kommandot nedan för att ladda andra grejer
-                    Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB; delete [SO4]545;")
+                    Jmol.script(jmolApplet0, "load models/pdb1mbo.ent; delete [SO4]154;")
                     refreshJMol(global_state);
             })
         </script>
