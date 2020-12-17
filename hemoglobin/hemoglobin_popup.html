@@ -92,6 +92,7 @@
                     s = s + "select Lys40.CA & (:a|:c); label Lys40; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
                     s = s + "select Asp94.CA & (:b|:d); label Asp94; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
                     s = s + "select His146.CA & (:b|:d); label His146; set labelalignment left; set labeloffset 40 0; font label 24 serif bold; color label white;"
+                    s = s + "select 146.NE2; color purple; select 94.OD2 | 94.OD1 | 94.CG; color purple;"
                     break;
                 }
                 switch( state.get("mark_sickle") ) {
@@ -167,7 +168,7 @@
 
 
 
-                <h2>Animation controls</h2>
+                <h2>Animering</h2>
                 <br>
                 <div class="anim_controls control_group">
                     <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame 1;')">
@@ -226,19 +227,6 @@
                 </div>
 
 
-                <h2>Highlights</h2>
-                <div class=control_group>
-                    <input type="checkbox" id="show_dg2" name="show_dg2" onClick="setStateCheck(this);">
-                    <label for="show_dg2">Visa DG2 (deoxy)</label><br>
-                    <input type="checkbox" id="mark_bohr" name="mark_bohr" onClick="setStateCheck(this);">
-                    <label for="mark_bohr">Märk ut aa för Bohrs effekt</label><br>
-                    <input type="checkbox" id="mark_sickle" name="mark_sickle" onClick="setStateCheck(this);">
-                    <label for="mark_sickle">Märk ut aa för sickelcellanemi (färg: hydrofobicitet)</label><br>
-                </div>
-
-
-                
-
                 <h2>Hemgrupp</h2>
                 <div class=control_group>
                     <h3>Modell</h3>
@@ -252,6 +240,18 @@
 
                     
                 </div>
+
+                <h2>Särskilda markeringar</h2>
+                <div class=control_group>
+                    <input type="checkbox" id="show_dg2" name="show_dg2" onClick="setStateCheck(this);">
+                    <label for="show_dg2">Visa 2,3-DPG (deoxy)</label><br>
+                    <input type="checkbox" id="mark_bohr" name="mark_bohr" onClick="setStateCheck(this);">
+                    <label for="mark_bohr">Markera &alpha;40, &beta;94 och &beta;146 (Bohrs effekt)</label><br>
+                    <input type="checkbox" id="mark_sickle" name="mark_sickle" onClick="setStateCheck(this);">
+                    <label for="mark_sickle">Markera &beta;Glu6, &beta;Phe85 och &beta;Leu88 (Sickelcellanemi)</label><br>
+                </div>
+
+                
 
                 <h2>Tvärsnitt</h2>
                 <div class=control_group>

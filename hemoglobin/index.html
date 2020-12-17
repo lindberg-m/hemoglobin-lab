@@ -16,61 +16,89 @@
 
 
 
-    <!-- NON TEMPLATE CONTENT : START -->
+            <!-- NON TEMPLATE CONTENT : START -->
 
 
-    <h2> Hemoglobin </h2>
-    <p>
-    Nu ska vi titta på hemoglobin, det syrebindande proteinet i röda blodkroppar. <a id="popup" href="hemoglobin_popup.html" target="popup" onclick="call()"><b>Klicka här</b></a> för att öppna strukturen för hemoglobin.</p>
+            <h2>Hemoglobin</h2>
+            <p>
+            Nu ska vi titta på hemoglobin, det syrebindande proteinet i röda blodkroppar. <a id="popup" href="hemoglobin_popup.html" target="popup" onclick="call()"><b>Klicka här</b></a> för att öppna strukturen för hemoglobin.</p>
 
-    <p>
-    Eftersom konformationsförändringar är viktiga för hemoglobinets funktion visas förändringen mellan t-state utan syre och r-state med fullt bundet syre med hjälp av en animering. Denna kan spelas, pausas och stegas fram och tillbaka med hjälp av animationskontrollerna, samtidigt som rotering, zoomning etc fungerar som tidigare.</p>
+            <p>
+            Eftersom konformationsförändringar är viktiga för hemoglobinets funktion visas förändringen mellan t-state utan syre och r-state med fullt bundet syre med hjälp av en animering. Denna kan spelas, pausas och stegas fram och tillbaka med hjälp av animationskontrollerna, samtidigt som rotering, zoomning etc fungerar som tidigare.</p>
 
-    <p>
-    Notera att stegen mellan deoxyhemoglobin och oxyhemoglobin i animationen har interpolerats, och därmed visar de inte nödvändigtvis exakt var varje atom befinner sig korrekt. Slutstegen är däremot experimentellt framtagna proteinstrukturer av oxy- respektive deoxyhemoglobin. Titta bara på dessa för noggrannare studier, exempelvis av hur järnatomen i hem-gruppen förflyttas vid bindning av O<sub>2</sub>. 
-    </p>
+            <p>
+            Notera att stegen mellan deoxyhemoglobin och oxyhemoglobin i animationen har interpolerats, och därmed visar de inte nödvändigtvis exakt var varje atom befinner sig korrekt. Slutstegen är däremot experimentellt framtagna proteinstrukturer av oxy- respektive deoxyhemoglobin. Titta bara på dessa för noggrannare studier, exempelvis av hur järnatomen i hem-gruppen förflyttas vid bindning av O<sub>2</sub>. 
+            </p>
 
-    <h3>Uppgift 1 - Proteinstruktur och kooperativitet</h3>
+            <h3>Uppgift 1 - Proteinstruktur och kooperativitet</h3>
 
-    <h4>1.1</h4>
-    <p>Hur många olika sorters kedjor innehåller hemoglobin, och hur många kedjor är det totalt? Hur många O<sub>2</sub>-molekyler kan maximalt bindas?</p>
-    <!-- 2 sorters kedjor, alfa och beta. 4 kedjor totalt. 4 O2-molekyler kan bindas. -->
+            <h4>1.1</h4>
+            <p>Hur många olika sorters kedjor innehåller hemoglobin, och hur många kedjor är det totalt? Hur många O<sub>2</sub>-molekyler kan maximalt bindas?</p>
+            <!-- 2 sorters kedjor, alfa och beta. 4 kedjor totalt. 4 O2-molekyler kan bindas. -->
 
+            <h4>1.2</h4>
+            <p>Till skillnad från myoglobin binder hemoglobin syre kooperativt. Vad innebär det, och hur påverkar det hemoglobins förmåga att transportera syre från lungorna till musklerna?</p>
+            <!-- Inbindning av en O2 gör det lättare att binda flera. Släpps en så blir det också lättare att släppa flera. Detta gör att hemoglobin kan binda mycket syre i en syrerik miljö (lungorna) och släppa mycket av syret i en syrefattig miljö (musklerna). -->
 
-    <p>Till skillnad från myoglobin binder hemoglobin syre kooperativt. Vad innebär det, och hur påverkar det hemoglobins förmåga att transportera syre från lungorna till musklerna?</p>
-    <!-- Inbindning av en O2 gör det lättare att binda flera. Släpps en så blir det också lättare att släppa flera. Detta gör att hemoglobin kan binda mycket syre i en syrerik miljö (lungorna) och släppa mycket av syret i en syrefattig miljö (musklerna). -->
+            <h4>1.3</h4>
+            <p>De syrebindande järnatomerna i hemoglobin sitter inte nära varandra. Vad är det som gör att inbindning av en O<sub>2</sub>-molekyl underlättar inbindningen av nästa? <a id="popup" href="heme_hemoglobin_popup.html" target="popup" onclick="call()"><b>Klicka här</b></a> för att se en inzoomad vy av hem-gruppen med och utan bundet syre (högerklicka och öppna i nytt fönster för att kunna se det samtidigt som hemoglobinmodellen).</p>
+            <!-- 
+            Utan syre bundet sitter järnatom något utanför poryrinringen i hem. När syre binds dras järnet in i samma plan som ringen. Detta drar i sin tur i det proximala histidinet och den alfahelix det är en del av, vilket resulterar i en förändring av interfacet mellan a1b1 och a2b2 som gör det lättare för proteinet att gå från t-state till r-state. R-state binder syre lättare, då det är mer fritt att röra sig än t-state (relexed/tense), så att det lättare kan befinna sig i den form där syre lättast binder in.
 
-    <p>De syrebindande järnatomerna i hemoglobin sitter inte nära varandra. Vad är det som gör att inbindning av en O<sub>2</sub>-molekyl underlättar inbindningen av nästa? <a id="popup" href="heme_hemoglobin_popup.html" target="popup" onclick="call()"><b>Klicka här</b></a> för att se en inzoomad vy av hem-gruppen med och utan bundet syre (högerklicka och öppna i nytt fönster för att kunna se det samtidigt som hemoglobinmodellen).</p>
-    <!-- 
-    Utan syre bundet sitter järnatom något utanför poryrinringen i hem. När syre binds dras järnet in i samma plan som ringen. Detta drar i sin tur i det proximala histidinet och den alfahelix det är en del av, vilket resulterar i en förändring av interfacet mellan a1b1 och a2b2 som gör det lättare för proteinet att gå från t-state till r-state. R-state binder syre lättare, då det är mer fritt att röra sig än t-state (relexed/tense), så att det lättare kan befinna sig i den form där syre lättast binder in.
+            Jag har inte tänkt att de här ska behöva berätta exakt vilka interaktioner mellan kedjorna det är som är viktiga, utan bara mest att det blir en konformationsförändring.
 
-    Jag har inte tänkt att de här ska behöva berätta exakt vilka interaktioner mellan kedjorna det är som är viktiga, utan bara mest att det blir en konformationsförändring.
+            Den här fråga innehåller förresten en del av svaret på frågan innan, men skit samma.
+            -->
 
-    Den här fråga innehåller förresten en del av svaret på frågan innan, men skit samma.
--->
-
-    <p>Precis som för myoglobin binder kolmonoxid mycket starkare till järnet i hemgruppen än syre. Då kolmonoxid binder in tappas en mycket större mängd av syretransportförmågan än bara de platser som direkt blockeras. Hur kommer det sig?</p>
-    <!-- Eftersom CO binder in så starkt stabiliseras R-state kraftigt. Om en plats blockeras av CO kommer resterande 3 ha svårare att släppa sina O2 i musklerna. -->
-
-
-
-
-
-
-
-    <h3>Uppgift 2</h3>
-    
-
-    <p>Röda blodkroppar innehåller 2,3-difosfoglycerat (2,3-DPG), som kraftigt ökar hemoglobins lämplighet för syretransport i fysiologiska förhållanden. Aktivera visning av 2,3-DPG i hemoglobinmodellen, och försök förklara hur det kommer sig. Det är lättast att se med proteinet i kalottmodell.</p>
-    <!-- 
-    DPG binder mellan betakedjorna i t-state och stabiliserar det tillståndet. Utan DPG binder alltså hemoglobin syre mycket starkare, så att mycket lägre syrehalter krävs för att släppa det mesta av syret. Resultatet är att 66% av maximal syretransportförmåga åstadkoms med DPG, medan man med enbart hemoglobin bara får 8% (100% vore alltså att varje protein binder 4 O2 i lungorna och släpper alla i musklerna). -->
-
-
-    <p>En annan viktig </p>
+            <h4>1.4</h4>
+            <p>Precis som för myoglobin binder kolmonoxid mycket starkare till järnet i hemgruppen än syre. Då kolmonoxid binder in tappas en mycket större mängd av syretransportförmågan än bara de platser som direkt blockeras. Hur kommer det sig?</p>
+            <!-- Eftersom CO binder in så starkt stabiliseras R-state kraftigt. Om en plats blockeras av CO kommer resterande 3 ha svårare att släppa sina O2 i musklerna. -->
 
 
 
 
+
+
+
+            <h3>Uppgift 2 - Alloster reglering</h3>
+            
+            <h4>2.1</h4>
+            <p>Röda blodkroppar innehåller 2,3-difosfoglycerat (2,3-DPG), som kraftigt ökar hemoglobins lämplighet för syretransport i fysiologiska förhållanden. Aktivera visning av 2,3-DPG i hemoglobinmodellen, och försök förklara hur det kommer sig. Det är lättast att se med proteinet i kalottmodell.</p>
+            <!-- 
+            DPG binder mellan betakedjorna i t-state och stabiliserar det tillståndet. I R-state försvinner den fickan och bindningarna till DPG måste därför brytas för att övergå från t-state till R-state. Utan DPG binder alltså hemoglobin syre mycket starkare, så att mycket lägre syrehalter krävs för att släppa det mesta av syret. Resultatet är att 66% av maximal syretransportförmåga åstadkoms med DPG, medan man med enbart hemoglobin bara får 8% (100% vore alltså att varje protein binder 4 O2 i lungorna och släpper alla i musklerna). -->
+
+
+            <h4>2.2</h4>
+            <p>Hemoglobins syrebindningsförmåga påverkas av pH (Bohrs effekt). Markera &alpha;40, &beta;94 och &beta;146 i modellen. Karboxylgruppen i Asp94 samt en kväveatom i His146 färgas lila för att synas tydligare. Vad händer här då pH sänks, och hur påverkar det hemoglobins syrebindningsförmåga? Hur påverkas transporten av syre från lungorna till arbetande muskler?</p>
+            <!--
+            I t-state flyttas de här aa nära varandra. Det bildas en saltbrygga mellan C-terminalen på His146 och Lys40. Om den markerade kväveatomen på His146 är protonerad, vilket sker mer vid lägre pH, så bildas det också en saltbrygga mellan His146 och Asp94:s karboxylgrupp, vilket stabiliserar t-state. Hemoglobin binder alltså syre sämre vid lägre pH.
+            
+            Det är lägre pH i blodkropparna i arbetande muskler än i lungorna, eftersom CO2 bildas under cellrespirationen. CO2 kan diffundera från musklerna in i blodkropparna. Här sjunker då pH genom reaktionen CO2 + H2O <-> H2CO3 <-> HCO3- + H+. Därav protoneras His146, och t-state stabiliseras, så att mer syre släpper. Reaktionen omvänds i lungorna så att mer syre kan bindas igen. Alltså blir syretransportförmågan högre av den här effekten.-->
+
+
+            <p>Notera att pH också har en effekt på C-terminalen i &alpha;-kedjorna, men då den första aminosyran saknas i modellen kan det inte illustreras väl här.</p>
+
+
+
+            <h3>Uppgift 3 - Sickelcellanemi</h3>
+
+            <h4>3.1</h4>
+            <p>Nu ska vi titta på hur hemoglobin kan förändras av sjukdomen sickelcellanemi, där hemoglobin klumpas ihop i långa fibrer i blodkropparna. Markera &beta;Glu6, &beta;Phe85 och &beta;Leu88 i modellen. Sickelcellanemi orsakas av en mutation där &beta;Glu6 byts ut mot valin. Den muterade formen kallas hemoglobin S (HbS). Hur förändras poläriteten i &beta;6 av mutationen?</p>
+            <!-- polär -> hydrofob -->
+
+            <h4>3.2</h4>
+            <p>&beta;Phe85 och &beta;Leu88 är oförändrade i sickelcellanemi, men är ändå viktiga för fiberbildning av HbS. Varför?</p>
+            <!-- Val6 sätter sig mot dem eftersom de också är hydrofoba. Hur de sitter gör att långa fibrer kan bildas. -->
+
+            <h4>3.3</h4>
+            <p>HbS bildar främst fibrer när syre ej är bundet. Varför då?</p>
+            <!-- Phe85 och Leu88 är bara exponerade i deoxyhemoglobin. I syresatt hemoglobin blir de mindre åtkomliga, och fiberbildning sker ej. -->
+
+
+
+            <h3>
+                Gå till <a href="../covid_spike/">nästa</a> uppgift
+            </h3>
 
 
 
