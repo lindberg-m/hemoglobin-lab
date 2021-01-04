@@ -10,18 +10,10 @@
         <script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
         <script type="text/javascript" src="javascript/jmolsetup.js"></script>
 
-
-
         <script type="text/javascript">
             let global_state = new Map([
                         ["amino_model", "ball_and_stick"],
                         ["amino_color", "CPK"],
-                        /*
-                        ["his_model", "same_as_protein"],
-                        ["heme_model", "ball_and_stick"],
-                        ["heme_color", "CPK"], 
-                        ["hydrophobic_surface", "false"],
-                        */
                         ["show_water", "false"],
                         ["cross_section", "off"]
                         ]);
@@ -47,24 +39,67 @@
                     case "CPK":
                     s = s + "select amino; color cpk;";
                     break;
+
                     case "hydrophobicity":
                     s = s + "select (amino and polar); color red; select (amino and hydrophobic); color blue;";
                     break;
+
                     case "sec_structure":
                     s = s + "select amino; color structure;";
                     break;
+
                     case "translucent":
                     s = s + "select amino; color cpk; color TRANSLUCENT;";
                     break;
+
                     case "monomers":
                     s = s + "select :A; color green; select :B; color blue; select :C; color red;";
                     break;
+
                     case "subunits":
                     s = s + "select :A,:B,:C; color purple; select 1-666; color orange;";
                     break;
- 
                 }
-               
+
+                switch (state.get("mutation_486") ) {
+                  case true:
+                  s = s + "select 486; color cyan; spacefill;";
+                  break;
+
+                  case false:
+                  s = s + "select 486; color cpk; wireframe;";
+                  break;
+                }
+                switch (state.get("mutation_484") ) {
+                  case true:
+                  s = s + "select 484; color cyan; spacefill;";
+                  break;
+
+                  case false:
+                  s = s + "select 484; color cpk; wireframe;";
+                  break;
+                }
+
+                switch (state.get("mutation_614") ) {
+                  case true:
+                  s = s + "select 614; color cyan; spacefill;";
+                  break;
+
+                  case false:
+                  s = s + "select 614; color cpk; wireframe;";
+                  break;
+                }
+                switch (state.get("mutation_501") ) {
+                  case true:
+                  s = s + "select 501; color cyan; spacefill;";
+                  break;
+
+                  case false:
+                  s = s + "select 501; color cpk; wireframe;";
+                  break;
+                }
+
+              
                 switch( state.get("show_water") ) {
                     case true:
                     s = s + "display add NAG;";
@@ -73,17 +108,8 @@
                     s = s + "hide add NAG;";
                     break;
                 }
-              /*
-                switch( state.get("hydrophobic_surface") ) {
-                    case true:
-                    s = s + "isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl;";
-                    break;
-                    case false:
-                    s = s + "isosurface off;";
-                    break;
-                }
-                */
-                switch( state.get("cross_section") ) {
+
+               switch( state.get("cross_section") ) {
                     case "off":
                     s = s + "slab off;"
                     break;
@@ -119,8 +145,6 @@
                 refreshJMol(global_state);
             }
         </script>
-
-
 
         <!-- Initial jmol script to run (already initiated) -->
         <script type="text/javascript">
@@ -164,60 +188,51 @@
                     <label for="show_water">Visa kolhydrater</label><br>
 
 
-
                     <br>
                     <h3>Färg</h3>
 
                     <input type="radio" id="amino_cpk" name="amino_color" value="CPK" onClick="setStateRadio(this);" checked="checked">
                     <label for="amino_cpk">CPK</label><br>
+
                     <input type="radio" id="amino_hydrophobicity" name="amino_color" value="hydrophobicity" onClick="setStateRadio(this);">
                     <label for="amino_hydrophobicity">Hydrofobicitet</label><br>
+
                     <input type="radio" id="amino_sec_structure" name="amino_color" value="sec_structure" onClick="setStateRadio(this);">
                     <label for="amino_sec_structure">Sekundärstruktur</label><br>
+
                     <input type="radio" id="amino_translucent" name="amino_color" value="translucent" onClick="setStateRadio(this);">
                     <label for="amino_translucent">Genomskinlig</label><br>
+
                     <input type="radio" id="monomers" name="amino_color" value="monomers" onClick="setStateRadio(this);">
                     <label for="monomers">Sidokedja</label><br>
+
                     <input type="radio" id="monomers" name="amino_color" value="subunits" onClick="setStateRadio(this);">
                     <label for="subunits">Subenheter</label><br>
 
-
+                    <input type="radio" id="mutations" name="amino_color" value="mutations" onClick="setStateRadio(this);">
+                    <label for="subunits">Mutationer</label><br>
 
                     <br>
+                    <h3>Mutationer</h3>
                     <!--
-                    <h3>His64 & His93</h3>
-                    <input type="radio" id="his_same_as_protein" name="his_model" value="same_as_protein" onClick="setStateRadio(this);" checked="checked">
-                    <label for="his_same_as_protein">Samma som resten av proteinet</label><br>
-                    <input type="radio" id="his_ball_and_stick" name="his_model" value="ball_and_stick" onClick="setStateRadio(this);">
-                    <label for="his_ball_and_stick">Kul- och pinnmodell (cyan)</label><br>
-                    <input type="radio" id="his_spacefill" name="his_model" value="spacefill" onClick="setStateRadio(this);">
-                    <label for="his_spacefill">Kalottmodell (cyan)</label><br>
+                    <input type="checkbox" id="mutation_486" name="utation_486" onClick="setStateCheck(this);" checked>
+                    <label for="show_water">F486</label><br>
+
+                    <input type="checkbox" id="mutation_484" name="mutation_484" onClick="setStateCheck(this);" checked>
+                    <label for="show_water">E484</label><br>
                     -->
 
-                </div>
-                <!--
-                <h2>Hemgrupp</h2>
-                <div class=control_group>
-                    <h3>Modell</h3>
+                    <input type="checkbox" id="mutation_614" name="mutation_614" onClick="setStateCheck(this);" checked>
+                    <label for="show_water">D614G</label><br>
 
-                    <input type="radio" id="heme_ball_and_stick" name="heme_model" value="ball_and_stick" onClick="setStateRadio(this);" checked="checked">
-                    <label for="heme_ball_and_stick">Kul- och pinnmodell</label><br>
-                    <input type="radio" id="heme_spacefill" name="heme_model" value="spacefill" onClick="setStateRadio(this);">
-                    <label for="heme_spacefill">Kalottmodell</label><br>
-                    <input type="radio" id="heme_hide" name="heme_model" value="hide" onClick="setStateRadio(this);">
-                    <label for="heme_hide">Dölj</label><br>
+                    <input type="checkbox" id="mutation_501" name="mutation_501" onClick="setStateCheck(this);" checked>
+                    <label for="show_water">N501Y</label><br>
+
+
 
 
                     <br>
-                    <h3>Färg</h3>
-
-                    <input type="radio" id="heme_cpk" name="heme_color" value="CPK" onClick="setStateRadio(this);" checked="checked">
-                    <label for="heme_cpk">CPK</label><br>
-                    <input type="radio" id="heme_purple" name="heme_color" value="purple" onClick="setStateRadio(this);">
-                    <label for="heme_purple">Lila</label><br>
-                    
                 </div>
-                -->
 
                 <h2>Tvärsnitt</h2>
                 <div class=control_group>
