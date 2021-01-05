@@ -14,8 +14,12 @@
             let global_state = new Map([
                         ["amino_model", "ball_and_stick"],
                         ["amino_color", "CPK"],
-                        ["show_water", "false"],
-                        ["cross_section", "off"]
+                        ["cross_section", "off"],
+                        ["mutation_453", false],
+                        ["mutation_484", false],
+                        ["mutation_486", false],
+                        ["mutation_501", false] ,
+                        ["mutation_614", false]
                         ]);
 
             function refreshJMol(state) {
@@ -61,53 +65,11 @@
                     break;
                 }
 
-                switch (state.get("mutation_486") ) {
-                  case true:
-                  s = s + "select 486; color cyan; spacefill;";
-                  break;
-
-                  case false:
-                  s = s + "select 486; color cpk; wireframe;";
-                  break;
-                }
-                switch (state.get("mutation_484") ) {
-                  case true:
-                  s = s + "select 484; color cyan; spacefill;";
-                  break;
-
-                  case false:
-                  s = s + "select 484; color cpk; wireframe;";
-                  break;
-                }
-
-                switch (state.get("mutation_614") ) {
-                  case true:
-                  s = s + "select 614; color cyan; spacefill;";
-                  break;
-
-                  case false:
-                  s = s + "select 614; color cpk; wireframe;";
-                  break;
-                }
-                switch (state.get("mutation_501") ) {
-                  case true:
-                  s = s + "select 501; color cyan; spacefill;";
-                  break;
-
-                  case false:
-                  s = s + "select 501; color cpk; wireframe;";
-                  break;
-                }
-
-              
-                switch( state.get("show_water") ) {
-                    case true:
-                    s = s + "display add NAG;";
-                    break;
-                    case false:
-                    s = s + "hide add NAG;";
-                    break;
-                }
+                s = s + highlightMutation(453, state.get("mutation_453"));
+                s = s + highlightMutation(484, state.get("mutation_484"));
+                s = s + highlightMutation(486, state.get("mutation_486"));
+                s = s + highlightMutation(501, state.get("mutation_501"));
+                s = s + highlightMutation(614, state.get("mutation_614"));
 
                switch( state.get("cross_section") ) {
                     case "off":
@@ -130,8 +92,6 @@
                     break;
 
                 }
-
-
                 Jmol.script(jmolApplet0, s);
             }
 
@@ -144,6 +104,18 @@
                 global_state.set(checkbox.name, checkbox.checked);
                 refreshJMol(global_state);
             }
+
+            function highlightMutation(num, checkbox_bool=false) {
+              // Create a jmol command-string used for highlighting certain
+              // positions.
+              numstring = num.toString();
+              if (checkbox_bool) {
+                col = "cyan; spacefill;";
+              } else {
+                col = "cpk; wireframe;";
+              } 
+              return("select " + numstring + "; color " + col);
+            }
         </script>
 
         <!-- Initial jmol script to run (already initiated) -->
@@ -151,7 +123,7 @@
             $(document).ready(
                 function(){
                     // Ändra kommandot nedan för att ladda andra grejer
-                    Jmol.script(jmolApplet0, "load models/covid_spike_trimer.pdb; hide add NAG;")
+                    Jmol.script(jmolApplet0, "load models/covid_spike.pdb; hide add NAG;")
                     //Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB;")
                     refreshJMol(global_state);
             })
@@ -184,10 +156,6 @@
                     <input type="checkbox" id="hydrophobic_surface" name="hydrophobic_surface" onClick="setStateCheck(this);">
                     <label for="hydrophobic_surface">Hydrofobicitetsfärgad yta</label><br>
                     -->
-                    <input type="checkbox" id="show_water" name="show_water" onClick="setStateCheck(this);" checked>
-                    <label for="show_water">Visa kolhydrater</label><br>
-
-
                     <br>
                     <h3>Färg</h3>
 
@@ -209,27 +177,20 @@
                     <input type="radio" id="monomers" name="amino_color" value="subunits" onClick="setStateRadio(this);">
                     <label for="subunits">Subenheter</label><br>
 
-                    <input type="radio" id="mutations" name="amino_color" value="mutations" onClick="setStateRadio(this);">
-                    <label for="subunits">Mutationer</label><br>
-
                     <br>
                     <h3>Mutationer</h3>
-                    <!--
-                    <input type="checkbox" id="mutation_486" name="utation_486" onClick="setStateCheck(this);" checked>
-                    <label for="show_water">F486</label><br>
 
-                    <input type="checkbox" id="mutation_484" name="mutation_484" onClick="setStateCheck(this);" checked>
-                    <label for="show_water">E484</label><br>
-                    -->
+                    <input type="checkbox" id="mutation_453" name="mutation_453" onClick="setStateCheck(this);" >
+                    <label for="mutation_453">Y453F</label><br> 
 
-                    <input type="checkbox" id="mutation_614" name="mutation_614" onClick="setStateCheck(this);" checked>
-                    <label for="show_water">D614G</label><br>
+                    <input type="checkbox" id="mutation_484" name="mutation_484" onClick="setStateCheck(this);" >
+                    <label for="mutation_484">E484</label><br>
 
-                    <input type="checkbox" id="mutation_501" name="mutation_501" onClick="setStateCheck(this);" checked>
-                    <label for="show_water">N501Y</label><br>
-
-
-
+                    <input type="checkbox" id="mutation_501" name="mutation_501" onClick="setStateCheck(this);" >
+                    <label for="mutation_614">N501Y</label><br>
+                    
+                    <input type="checkbox" id="mutation_614" name="mutation_614" onClick="setStateCheck(this);" >
+                    <label for="mutation_614">D614G</label><br>
 
                     <br>
                 </div>
