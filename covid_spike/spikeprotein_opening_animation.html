@@ -52,10 +52,6 @@
                     s = s + "select amino; color structure;";
                     break;
 
-                    case "translucent":
-                    s = s + "select amino; color cpk; color TRANSLUCENT;";
-                    break;
-
                     case "monomers":
                     s = s + "select :A; color green; select :B; color blue; select :C; color red;";
                     break;
@@ -166,9 +162,6 @@
 
                     <input type="radio" id="amino_sec_structure" name="amino_color" value="sec_structure" onClick="setStateRadio(this);">
                     <label for="amino_sec_structure">Sekundärstruktur</label><br>
-
-                    <input type="radio" id="amino_translucent" name="amino_color" value="translucent" onClick="setStateRadio(this);">
-                    <label for="amino_translucent">Genomskinlig</label><br>
 
                     <input type="radio" id="monomers" name="amino_color" value="monomers" onClick="setStateRadio(this);">
                     <label for="monomers">Sidokedja</label><br>
