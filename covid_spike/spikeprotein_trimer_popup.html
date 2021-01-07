@@ -110,11 +110,10 @@
               // positions.
               numstring = num.toString();
               if (checkbox_bool) {
-                col = "cyan; spacefill;";
+                return("select " + numstring + "; color cyan; spacefill;");
               } else {
-                col = "cpk; wireframe;";
+                return("");
               } 
-              return("select " + numstring + "; color " + col);
             }
         </script>
 
