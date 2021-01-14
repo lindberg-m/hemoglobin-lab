@@ -64,6 +64,19 @@
                     s = s + "select :A,:B,:C; color purple; select 1-666; color orange;";
                     break;
                 }
+                if(state.get("amino_color") == "subunits"){
+                    s = s + "set echo echo_subunitS1 5% 90%; echo S1; color echo orange;";
+                    s = s + "set echo echo_subunitS2 5% 85%; echo S2; color echo purple;";
+                } else {
+                    s = s + "set echo echo_subunitS1 off; set echo echo_subunitS2 off;";
+                }
+                
+                if(state.get("amino_color") == "hydrophobicity"){
+                    s = s + "set echo echo_polar 5% 15%; echo Polar; color echo red;"
+                    s = s + "set echo echo_hydrophobic 5% 10%; echo Hydrophobic; color echo blue;"
+                } else {
+                    s = s + "set echo echo_polar off; set echo echo_hydrophobic off;"
+                }
 
                 s = s + highlightMutation(453, state.get("mutation_453"));
                 s = s + highlightMutation(484, state.get("mutation_484"));
