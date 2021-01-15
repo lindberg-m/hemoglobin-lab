@@ -15,6 +15,19 @@
                         ["amino_model", "ball_and_stick"],
                         ["amino_color", "CPK"],
                         ["cross_section", "off"],
+              /* UK Mutaitons here: */
+
+                        ["mutation_69-70", false] ,
+                        ["mutation_144", false] ,
+                        ["mutation_501", false] ,
+                        ["mutation_570", false] ,
+                        ["mutation_614", false], 
+                        // ["mutation_681", false], // Not visible for some reason...
+                        ["mutation_716", false],
+                        ["mutation_982", false],
+                        ["mutation_1118", false],
+              /* UK Mutations End */
+
                         ["mutation_453", false],
                         ["mutation_484", false],
                         ["mutation_486", false],
@@ -78,6 +91,16 @@
                     s = s + "set echo echo_polar off; set echo echo_hydrophobic off;"
                 }
 
+                s = s + highlightDeletion(69,  70,  state.get("mutation_69-70")); 
+                s = s + highlightDeletion(144, 144, state.get("mutation_114")); 
+                s = s + highlightMutation(501, state.get("mutation_501")); 
+                s = s + highlightMutation(570, state.get("mutation_570")); 
+                s = s + highlightMutation(614, state.get("mutation_614")); 
+                // s = s + highlightMutation(681, state.get("mutation_681")); // Not visible for some reason...
+                s = s + highlightMutation(716, state.get("mutation_716")); 
+                s = s + highlightMutation(982, state.get("mutation_982")); 
+                s = s + highlightMutation(1118, state.get("mutation_1118"));
+
                 s = s + highlightMutation(453, state.get("mutation_453"));
                 s = s + highlightMutation(484, state.get("mutation_484"));
                 s = s + highlightMutation(486, state.get("mutation_486"));
@@ -116,6 +139,16 @@
             function setStateCheck(checkbox) {
                 global_state.set(checkbox.name, checkbox.checked);
                 refreshJMol(global_state);
+            }
+
+            function highlightDeletion(num_start, num_end, checkbox_bool=false) {
+              str_start = num_start.toString();
+              str_end = num_end.toString();
+              if (checkbox_bool) {
+                return("select " + str_start + "-" + str_end + "; color magenta; spacefill;");
+              } else {
+                return("");
+              }
             }
 
             function highlightMutation(num, checkbox_bool=false) {
@@ -190,7 +223,41 @@
                     <label for="subunits">Subenheter</label><br>
 
                     <br>
-                    <h3>Mutationer</h3>
+                    <h3>Mutationer UK</h3>
+
+                    <input type="checkbox" id="mutation_69-70" name="mutation_69-70" onClick="setStateCheck(this);" >
+                    <label for="mutation_69-70">69-70 Deletion</label><br> 
+
+                    <input type="checkbox" id="mutation_114" name="mutation_114" onClick="setStateCheck(this);" >
+                    <label for="mutation_114">114 Deletion</label><br> 
+
+                    <input type="checkbox" id="mutation_501" name="mutation_501" onClick="setStateCheck(this);" >
+                    <label for="mutation_501">N501Y</label><br> 
+
+                    <input type="checkbox" id="mutation_570" name="mutation_570" onClick="setStateCheck(this);" >
+                    <label for="mutation_570">A570D</label><br> 
+
+                    <input type="checkbox" id="mutation_614" name="mutation_614" onClick="setStateCheck(this);" >
+                    <label for="mutation_614">D614G</label><br> 
+
+                    <!--
+                    <input type="checkbox" id="mutation_681" name="mutation_681" onClick="setStateCheck(this);" >
+                    <label for="mutation_681">P681H</label><br> >
+                    -->
+
+                    <input type="checkbox" id="mutation_716" name="mutation_716" onClick="setStateCheck(this);" >
+                    <label for="mutation_716">T716I</label><br> 
+
+                    <input type="checkbox" id="mutation_982" name="mutation_982" onClick="setStateCheck(this);" >
+                    <label for="mutation_982">S982A</label><br> 
+
+                    <input type="checkbox" id="mutation_1118" name="mutation_1118" onClick="setStateCheck(this);" >
+                    <label for="mutation_1118">D1118H</label><br> 
+
+
+                    <!-- END UK MUTATIONS -->
+
+                    <!--
 
                     <input type="checkbox" id="mutation_453" name="mutation_453" onClick="setStateCheck(this);" >
                     <label for="mutation_453">Y453F</label><br> 
@@ -203,6 +270,7 @@
                     
                     <input type="checkbox" id="mutation_614" name="mutation_614" onClick="setStateCheck(this);" >
                     <label for="mutation_614">D614G</label><br>
+                    -->
 
                     <br>
                 </div>
