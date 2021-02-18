@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spikeprotein</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style_jmol.css">
+
+
+        <script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
+        <script type="text/javascript" src="javascript/jmolsetup.js"></script>
+
+        <script type="text/javascript">
+            let global_state = new Map([
+                        ["amino_model", "cartoon"],
+                        ["amino_color", "subunits"],
+                        ["cross_section", "off"],
+              /* UK Mutaitons here: */
+
+                        ["mutation_69-70", false] ,
+                        ["mutation_144", false] ,
+                        ["mutation_501", false] ,
+                        ["mutation_570", false] ,
+                        ["mutation_614", false], 
+                        // ["mutation_681", false], // Not visible for some reason...
+                        ["mutation_716", false],
+                        ["mutation_982", false],
+                        ["mutation_1118", false],
+              /* UK Mutations End */
+
+
+                        ["mutation_453", false],
+                        ["mutation_484", false],
+                        ["mutation_486", false],
+                        ["mutation_501", false] ,
+                        ["mutation_614", false]
+                        ]);
+
+            function refreshJMol(state) {
+
+                let s = ""; 
+                switch( state.get("amino_model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add amino; select amino; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    break;
+                    case "spacefill":
+                    s = s + "display add amino; select amino; spacefill only;";
+                    break;
+                    case "cartoon":
+                    s = s + "display add amino; select amino; cartoon only;";
+                    break;
+                    case "hide":
+                    s = s + "hide add amino;";
+                    break;
+                }
+                switch( state.get("amino_color") ){
+                    case "CPK":
+                    s = s + "select amino; color cpk;";
+                    break;
+
+                    case "hydrophobicity":
+                    s = s + "select (amino and polar); color red; select (amino and hydrophobic); color blue;";
+                    break;
+
+                    case "sec_structure":
+                    s = s + "select amino; color structure;";
+                    break;
+
+                    case "monomers":
+                    s = s + "select :A; color green; select :B; color blue; select :C; color red;";
+                    break;
+
+                    case "subunits":
+                    s = s + "select :A,:B,:C; color purple; select 1-666; color orange;";
+                    break;
+                }
+
+                if(state.get("amino_color") == "subunits"){
+                    s = s + "set echo echo_subunitS1 5% 90%; echo S1; color echo orange;";
+                    s = s + "set echo echo_subunitS2 5% 85%; echo S2; color echo purple;";
+                } else {
+                    s = s + "set echo echo_subunitS1 off; set echo echo_subunitS2 off;";
+                }
+                
+                if(state.get("amino_color") == "hydrophobicity"){
+                    s = s + "set echo echo_polar 5% 15%; echo Polar; color echo red;"
+                    s = s + "set echo echo_hydrophobic 5% 10%; echo Hydrophobic; color echo blue;"
+                } else {
+                    s = s + "set echo echo_polar off; set echo echo_hydrophobic off;"
+                }
+
+                s = s + highlightDeletion(69,  70,  state.get("mutation_69-70")); 
+                s = s + highlightDeletion(144, 144, state.get("mutation_114")); 
+                s = s + highlightMutation(501, state.get("mutation_501")); 
+                s = s + highlightMutation(570, state.get("mutation_570")); 
+                s = s + highlightMutation(614, state.get("mutation_614")); 
+                // s = s + highlightMutation(681, state.get("mutation_681")); // Not visible for some reason...
+                s = s + highlightMutation(716, state.get("mutation_716")); 
+                s = s + highlightMutation(982, state.get("mutation_982")); 
+                s = s + highlightMutation(1118, state.get("mutation_1118")); 
+
+                s = s + highlightMutation(453, state.get("mutation_453"));
+                s = s + highlightMutation(484, state.get("mutation_484"));
+                s = s + highlightMutation(486, state.get("mutation_486"));
+                s = s + highlightMutation(501, state.get("mutation_501"));
+                s = s + highlightMutation(614, state.get("mutation_614"));
+
+               switch( state.get("cross_section") ) {
+                    case "off":
+                    s = s + "slab off;"
+                    break;
+                    case "70":
+                    s = s + "slab 70; slab on;"
+                    break;
+                    case "60":
+                    s = s + "slab 60; slab on;"
+                    break;
+                    case "50":
+                    s = s + "slab 50; slab on;"
+                    break;
+                    case "40":
+                    s = s + "slab 40; slab on;"
+                    break;
+                    case "30":
+                    s = s + "slab 30; slab on;"
+                    break;
+
+                }
+                Jmol.script(jmolApplet0, s);
+            }
+
+            function setStateRadio(radio) {
+                global_state.set(radio.name, radio.value);
+                refreshJMol(global_state);
+            }
+
+            function setStateCheck(checkbox) {
+                global_state.set(checkbox.name, checkbox.checked);
+                refreshJMol(global_state);
+            }
+
+            function highlightDeletion(num_start, num_end, checkbox_bool=false) {
+              str_start = num_start.toString();
+              str_end = num_end.toString();
+              if (checkbox_bool) {
+                return("select " + str_start + "-" + str_end + "; color magenta; spacefill;");
+              } else {
+                return("");
+              }
+            }
+
+ 
+
+            function highlightMutation(num, checkbox_bool=false) {
+              // Create a jmol command-string used for highlighting certain
+              // positions.
+              numstring = num.toString();
+              if (checkbox_bool) {
+                return("select " + numstring + "; color cyan; spacefill;");
+              } else {
+                return("");
+              } 
+            }
+        </script>
+
+        <!-- Initial jmol script to run (already initiated) -->
+        <script type="text/javascript">
+            $(document).ready(
+                function(){
+                    // Ändra kommandot nedan för att ladda andra grejer
+                    Jmol.script(jmolApplet0, "load models/covid_spike_closed_to_open_anim.pdb; hide add NAG; animation mode palindrome; animation on;")
+                    //Jmol.script(jmolApplet0, "load models/MYO_OXY.PDB;")
+                    refreshJMol(global_state);
+            })
+        </script>
+    </head>
+
+    
+    <body>
+        <div class="box">
+
+            <span id=jmolpane class=jmolpane></span>
+
+            <div class=controls>
+                
+                <h2>Animering</h2>
+                <br>
+                <div class="anim_controls control_group">
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame 1;')">
+                         <img src="media/first.png" title="first frame" height="20">
+                    </a>
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame prev;')">
+                        <img src="media/prev.png" title="Previous frame" height="20">
+                    </a> 
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim resume;')">
+                        <img src="media/play.png" title="Resume animation" height="20">
+                    </a> 
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause;')">
+                        <img src="media/pause.png" title="Pause animation" height="20">
+                    </a>
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame next;')">
+                        <img src="media/next.png" title="Next frame" height="20">
+                    </a>
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame last;')">
+                        <img src="media/last.png" title="last frame" height="20">
+                    </a>          
+                </div>
+
+
+
+                <h2>Protein</h2>
+                <div class=control_group>
+                    <h3>Modell</h3>
+
+                    <input type="radio" id="amino_ball_and_stick" name="amino_model" value="ball_and_stick" onClick="setStateRadio(this);">
+                    <label for="amino_ball_and_stick">Kul- och pinnmodell</label><br>
+                    <input type="radio" id="amino_spacefill" name="amino_model" value="spacefill" onClick="setStateRadio(this);">
+                    <label for="amino_spacefill">Kalottmodell</label><br>
+                    <input type="radio" id="amino_cartoon" name="amino_model" value="cartoon" onClick="setStateRadio(this);" checked="checked">
+                    <label for="amino_cartoon">Cartoon</label><br>
+                    <input type="radio" id="amino_hide" name="amino_model" value="hide" onClick="setStateRadio(this);">
+                    <label for="amino_hide">Dölj</label><br>
+
+                    <br>
+                    <!--
+                    <input type="checkbox" id="hydrophobic_surface" name="hydrophobic_surface" onClick="setStateCheck(this);">
+                    <label for="hydrophobic_surface">Hydrofobicitetsfärgad yta</label><br>
+                    -->
+                    <br>
+                    <h3>Färg</h3>
+
+                    <input type="radio" id="amino_cpk" name="amino_color" value="CPK" onClick="setStateRadio(this);">
+                    <label for="amino_cpk">CPK</label><br>
+
+                    <input type="radio" id="amino_hydrophobicity" name="amino_color" value="hydrophobicity" onClick="setStateRadio(this);">
+                    <label for="amino_hydrophobicity">Hydrofobicitet</label><br>
+
+                    <input type="radio" id="amino_sec_structure" name="amino_color" value="sec_structure" onClick="setStateRadio(this);">
+                    <label for="amino_sec_structure">Sekundärstruktur</label><br>
+
+                    <input type="radio" id="monomers" name="amino_color" value="monomers" onClick="setStateRadio(this);">
+                    <label for="monomers">Sidokedja</label><br>
+
+                    <input type="radio" id="monomers" name="amino_color" value="subunits" onClick="setStateRadio(this);"  checked="checked">
+                    <label for="subunits">Subenheter</label><br>
+
+
+
+                    <br>
+                    <h3>Mutationer UK</h3>
+
+                    <input type="checkbox" id="mutation_69-70" name="mutation_69-70" onClick="setStateCheck(this);" >
+                    <label for="mutation_69-70">69-70 Deletion</label><br> 
+
+                    <input type="checkbox" id="mutation_114" name="mutation_114" onClick="setStateCheck(this);" >
+                    <label for="mutation_114">114 Deletion</label><br> 
+
+                    <input type="checkbox" id="mutation_501" name="mutation_501" onClick="setStateCheck(this);" >
+                    <label for="mutation_501">N501Y</label><br> 
+
+                    <input type="checkbox" id="mutation_570" name="mutation_570" onClick="setStateCheck(this);" >
+                    <label for="mutation_570">A570D</label><br> 
+
+                    <input type="checkbox" id="mutation_614" name="mutation_614" onClick="setStateCheck(this);" >
+                    <label for="mutation_614">D614G</label><br> 
+
+                    <!--
+                    <input type="checkbox" id="mutation_681" name="mutation_681" onClick="setStateCheck(this);" >
+                    <label for="mutation_681">P681H</label><br> >
+                    -->
+
+                    <input type="checkbox" id="mutation_716" name="mutation_716" onClick="setStateCheck(this);" >
+                    <label for="mutation_716">T716I</label><br> 
+
+                    <input type="checkbox" id="mutation_982" name="mutation_982" onClick="setStateCheck(this);" >
+                    <label for="mutation_982">S982A</label><br> 
+
+                    <input type="checkbox" id="mutation_1118" name="mutation_1118" onClick="setStateCheck(this);" >
+                    <label for="mutation_1118">D1118H</label><br> 
+
+
+                    <!-- END UK MUTATIONS -->
+
+                    <br>
+                </div>
+
+                <h2>Tvärsnitt</h2>
+                <div class=control_group>
+
+                    <input type="radio" id="cross_section_off" name="cross_section" value="off" onClick="setStateRadio(this);" checked="checked">
+                    <label for="cross_section_off">Av</label><br>
+                    <input type="radio" id="cross_section_70" name="cross_section" value="70" onClick="setStateRadio(this);">
+                    <label for="cross_section_70">30 %</label><br>
+                    <input type="radio" id="cross_section_60" name="cross_section" value="60" onClick="setStateRadio(this);">
+                    <label for="cross_section_60">40 %</label><br>
+                    <input type="radio" id="cross_section_50" name="cross_section" value="50" onClick="setStateRadio(this);">
+                    <label for="cross_section_50">50 %</label><br>
+                    <input type="radio" id="cross_section_40" name="cross_section" value="40" onClick="setStateRadio(this);">
+                    <label for="cross_section_40">60 %</label><br>
+                    <input type="radio" id="cross_section_30" name="cross_section" value="30" onClick="setStateRadio(this);">
+                    <label for="cross_section_30">70 %</label><br>
+
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </body>
+</html>

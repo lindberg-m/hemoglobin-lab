@@ -1,59 +1,38 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-<title>Super-Simple JSmol (2)</title>
-<meta charset="utf-8">
-<script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
-<script type="text/javascript"> 
+  <head>
+    <title>HEMOGLOBIN-LAB PROTOTYP</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="media/favicon.png">
+  </head>
+  <body>
+    <div id="content">
+        <h1 style="color:#ef6c64">
+            Hemoglobin Lab
+        </h1>
+        <p>
+        Välkommen till Hemoglobinlabben. I denna datorbaserade laboration 
+        kommer vi titta närmare på proteinstrukturen av flera olika protein,
+        däribland de syretransporterande proteinen myoglobin och hemoglobin.
+        </p>
 
-// supersimple2.htm - illustrating the use of jQuery(document).ready to 
-// populate all spans and divs AFTER the page is loaded.
-// This is good programming practice.
+        <p>
+        Vi kommer använda oss av ett enkelt web-gränssnitt för att titta på
+        röntgenkristallografier av proteinen, men det finns en rad olika verktyg
+        för att undersöka och analysera denna typ av data. Exempel på sådana 
+        program är: 
+        <ul>
+            <li> <a href=https://www.molsoft.com>ICM Browser</a></li>
+            <li> <a href=https://pymol.org/2/>PyMOL</a></li>
+            <li> <a href=https://discover.3ds.com/discovery-studio-visualizer-download>Discovery Studio Visualizer</a></li>
+        </ul>
 
-$(document).ready(
-
-function() {
-
-Info = {
-  width: 1000,
-  height: 700,
-  debug: false,
-  j2sPath: "jsmol/jsmol/j2s",
-  color: "#f0f0f0",
-  disableJ2SLoadMonitor: true,
-  disableInitialConsole: true,
-  addSelectionOptions: false,
-  serverURL: "jsmol/jsmol/php/jsmol.php",
-  use: "HTML5",
-  readyFunction: null,
-  script: "load models/MYO_OXY.PDB; delete water; delete [SO4]545"
-}
-
-$("#mydiv").html(Jmol.getAppletHtml("jmolApplet0",Info))
-
-// $("#btns").html(
-//   Jmol.jmolButton(jmolApplet0, "isosurface myo ignore(hetero) saSurface 0.05 colorscheme rwb property hydrophobicity","Surface - hydrophobicity")
-//  +Jmol.jmolButton(jmolApplet0, "spin off","spin OFF")
-//  )  
-
-var r = [
-    ["isosurface off; select all; wireframe only; wireframe 0.2; spacefill 0.4; color cpk", "ball and stick", true],
-    ["isosurface off; restrict his64,his93,hem546; wireframe 0.2; spacefill 0.4; select protein; color purple; select amino and not (his64 or his93); cartoon on; color gray; color TRANSLUCENT", "Heme & His-focused"],
-    ["isosurface off; isosurface models/myo_oxy_hydrophobic_surface.jvxl","Surface - hydrophobicity"]
-  
-  ]
-$("#btns").html(Jmol.jmolRadioGroup(jmolApplet0, r, "<br>", "Viewing options"))
-
-}
-
-);
-
-
-
-</script>
-</head>
-<body>
-<span id=mydiv></span>
-<span id=btns></span>
-</body>
+        <p>
+        Data för analyser av detta slag lagras i så kallade <a href=https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)>Protein Data Bank</a>-filer och sådana kan man ladda ner gratis från <a href=https://www.wwpdb.org/>wwPDB</a>.
+        </p>
+        <h3> Gå till första <a href=myoglobin/>uppgiften</a> </h3>
+    </div>
+  </body>
 </html>

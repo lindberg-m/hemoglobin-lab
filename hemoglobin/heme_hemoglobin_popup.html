@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hemoglobin</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style_jmol.css">
+
+
+        <script type="text/javascript" src="jsmol/jsmol/JSmol.min.js"></script>
+        <script type="text/javascript" src="javascript/jmolsetup.js"></script>
+
+
+
+        <script type="text/javascript">
+            let global_state = new Map([
+                        ["model", "ball_and_stick"],
+                        ["show_labels", true]
+                        ]);
+
+            function refreshJMol(state) {
+
+                let s = ""; 
+                switch( state.get("model") ) {
+                    case "ball_and_stick":
+                    s = s + "display add all; select all; wireframe only; wireframe 0.2; spacefill 0.4;";
+                    break;
+                    case "spacefill":
+                    s = s + "display add all; select all; spacefill only;";
+                    break;
+                }
+                if(state.get("show_labels")){
+                    s = s + "select His87.CA; label Proximal His; set labelalignment left; set labeloffset 0 60; font label 24 serif bold; color label white;"
+                    s = s + "select His58.CA; label Distal His; set labelalignment left; set labeloffset 0 60; font label 24 serif bold; color label white;"
+                    s = s + "select iron; label Fe; set labelalignment left; set labeloffset 0 20; font label 24 serif bold; color label white;"
+                    s = s + "select Oxy143.O2; label O2; set labelalignment left; set labeloffset 15 0; font label 24 serif bold; color label white;"
+                }
+
+
+
+                Jmol.script(jmolApplet0, s);
+            }
+
+            function setStateRadio(radio) {
+                global_state.set(radio.name, radio.value);
+                refreshJMol(global_state);
+            }
+
+            function setStateCheck(checkbox) {
+                global_state.set(checkbox.name, checkbox.checked);
+                refreshJMol(global_state);
+            }
+        </script>
+
+
+
+        <!-- Initial jmol script to run (already initiated) -->
+        <script type="text/javascript">
+            $(document).ready(
+                function(){
+                    // Ändra kommandot nedan för att ladda andra grejer
+                    Jmol.script(jmolApplet0, "load models/heme_2dn2_2dn1.pdb; anim frame [1-2]; anim mode palindrome 2 2; anim on; set echo top center; echo @{(_modelnumber == 1 ? 'DEOXY' : 'OXY')}; font echo 30 serif bold; color echo white;") 
+                    refreshJMol(global_state);
+            })
+        </script>
+    </head>
+
+
+    <body>
+        <div class="box">
+
+            <span id=jmolpane class=jmolpane></span>
+
+            <div class=controls>
+
+
+
+                <h2>Animering</h2>
+                <br>
+                <div class="anim_controls control_group">
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame 1;')">
+                         <img src="media/deoxy.png" title="deoxyhemoglobin frame" height="20">
+                    </a>
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim resume;')">
+                        <img src="media/play.png" title="Resume animation" height="20">
+                    </a> 
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause;')">
+                        <img src="media/pause.png" title="Pause animation" height="20">
+                    </a>
+                    <a href="javascript: Jmol.script(jmolApplet0, 'anim pause; frame last;')">
+                        <img src="media/oxy.png" title="oxyhemoglobin frame" height="20">
+                    </a>          
+                </div>
+                
+
+
+
+
+                <h2>Modell</h2>
+                <div class=control_group>
+            
+
+                    <input type="radio" id="ball_and_stick" name="model" value="ball_and_stick" onClick="setStateRadio(this);" checked="checked">
+                    <label for="ball_and_stick">Kul- och pinnmodell</label><br>
+                    <input type="radio" id="spacefill" name="model" value="spacefill" onClick="setStateRadio(this);">
+                    <label for="spacefill">Kalottmodell</label><br>
+
+
+                    <br>
+                    <input type="checkbox" id="show_labels" name="show_labels" onClick="setStateCheck(this);" checked="checked">
+                    <label for="show_labels">Show labels</label><br> 
+                </div>
+
+
+                <br>
+                <br>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+
+html,
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+
+/* Jmol till vänster, kontroller till höger. Jmol anpassar storlek efter avd som finns över efter kontrollerna */
+.box {
+	height:100%;
+	overflow: hidden; /*overflow hidden behövs för att height: 100% ska fungera i Firefox av någon anledning*/
+	display: flex;
+	flex-flow: row;
+}
+
+.box .jmolpane{
+	flex: 1 1 auto;
+
+}
+
+.box .controls {
+	flex: 0 0 300px;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+
+
+
+.controls {
+	padding: 20px;
+}
+
+.anim_controls {
+	text-decoration: none;
+	display: flex;
+	justify-content: space-between;
+
+}
+
+.control_group {
+	padding-left: 20px;
+	padding-bottom: 20px;
+}
+
+h2 {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+h3 {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+/* knappen fick konstig font size i firefox, så tänkte ändra här, men för mycket pill.
+.button input {
+	font-family: times;
+	font-size: 16px;
+}
+*/
